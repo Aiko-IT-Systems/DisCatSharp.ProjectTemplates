@@ -15,7 +15,17 @@ Contains the skeleton of your typical web project. Adding support for MVC / API 
 
 # Installation 
 
-Run the following command in your terminal
+Run the following command in your terminal to install the templates.
 ```
 dotnet new -i DisCatSharp.Hosting.ProjectTemplates
+```
+
+
+# **Important** 
+Rider currently **DOES NOT** support parameters in custom projects. So unfortunately, anyone who wants to use these templates with Rider
+will need to utilize the command line...
+
+To view the available parameters for the Bot Template, please use this command
+```
+dotnet new DCSWebHostBot --help
 ```
