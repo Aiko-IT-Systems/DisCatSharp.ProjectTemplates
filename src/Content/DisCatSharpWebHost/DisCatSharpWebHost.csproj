@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="DisCatSharp" Version="9.8.4-nightly-00186" />
+	<PackageReference Include="DisCatSharp.ApplicationCommands" Version="9.8.4-nightly-00186" />
+	<PackageReference Include="DisCatSharp.Configuration" Version="9.8.4-nightly-00186" />
+	<PackageReference Include="DisCatSharp.Hosting" Version="9.8.4-nightly-00186" />
+	<PackageReference Include="DisCatSharp.Hosting.DependencyInjection" Version="9.8.4-nightly-00186" />
+	<PackageReference Include="DisCatSharp.Interactivity" Version="9.8.4-nightly-00186" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+  </ItemGroup>
+
+</Project>

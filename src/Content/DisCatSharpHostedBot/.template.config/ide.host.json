@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json.schemastore.org/vs-2017.3.host",
+  "symbolInfo": [
+    {
+      "id": "UseApplicationCommands",
+      "name": {
+        "text": "Use Application Commands"
+      },
+      "description": {
+        "text": "Should the Application Commands Module be included?"
+      },
+      "isVisible": "true",
+      "defaultValue": "true"
+    },
+
+    {
+      "id": "UseCommands",
+      "name": {
+        "text": "Use Commands Next"
+      },
+      "description": {
+        "text": "Should the Commands Next Module be included?"
+      },
+      "isVisible": "true",
+      "defaultValue": "false"
+    },
+
+    {
+      "id": "UseCommon",
+      "name": {
+        "text": "Use Common"
+      },
+      "description": {
+        "text": "Should the Common Module be included?"
+      },
+      "isVisible": "true",
+      "defaultValue": "false"
+    },
+
+    {
+      "id": "UseInteractivity",
+      "name": {
+        "text": "Use Interactivity Commands"
+      },
+      "description": {
+        "text": "Should the Interactivity Module be included?"
+      },
+      "isVisible": "true",
+      "defaultValue": "false"
+    },
+
+    {
+      "id": "UseLavalink",
+      "name": {
+        "text": "Use Lavalink"
+      },
+      "description": {
+        "text": "Should the Lavalink Module be included?"
+      },
+      "isVisible": "true",
+      "defaultValue": "false"
+    },
+
+    {
+      "id": "UseVoice",
+      "name": {
+        "text": "Use Voice"
+      },
+      "description": {
+        "text": "Should the Voice Module be included?"
+      },
+      "isVisible": "true",
+      "defaultValue": "false"
+    },
+
+    {
+      "id": "UseVoiceNatives",
+      "name": {
+        "text": "Use Voice Natives"
+      },
+      "description": {
+        "text": "Should the Voice Natvies Module be included?"
+      },
+      "isVisible": "true",
+      "defaultValue": "false"
+    }
+  ]
+}

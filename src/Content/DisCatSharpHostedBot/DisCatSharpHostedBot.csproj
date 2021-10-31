@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DisCatSharp" Version="9.8.4-nightly-00189" />
+		<PackageReference Include="DisCatSharp.Configuration" Version="9.8.4-nightly-00189" />
+		<PackageReference Include="DisCatSharp.Hosting" Version="9.8.4-nightly-00189" />
+		<PackageReference Include="DisCatSharp.Hosting.DependencyInjection" Version="9.8.4-nightly-00189" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0-rc.2.21480.5" />
+	</ItemGroup>
+
+	<!--#if (UseApplicationCommands) -->
+	<ItemGroup>
+		<PackageReference Include="DisCatSharp.ApplicationCommands" Version="9.8.4-nightly-00189" />
+	</ItemGroup>
+	
+	<!--#endif -->
+	<!--#if (UseCommands) -->
+	<ItemGroup>
+		<PackageReference Include="DisCatSharp.CommandsNext" Version="9.8.4-nightly-00189" />
+	</ItemGroup>
+
+	<!--#endif -->
+	<!--#if (UseCommon) -->
+	<ItemGroup>
+		<PackageReference Include="DisCatSharp.Common" Version="9.8.4-nightly-00189" />
+	</ItemGroup>
+
+	<!--#endif -->
+	<!--#if (UseInteractivity) -->
+	<ItemGroup>
+		<PackageReference Include="DisCatSharp.Interactivity" Version="9.8.4-nightly-00189" />
+	</ItemGroup>
+	
+	<!--#endif -->
+	<!--#if (UseLavalink) -->
+	<ItemGroup>
+		<PackageReference Include="DisCatSharp.Lavalink" Version="9.8.4-nightly-00189" />
+	</ItemGroup>
+	
+	<!--#endif -->
+	<!--#if (UseVoice) -->
+	<ItemGroup>
+		<PackageReference Include="DisCatSharp.VoiceNext" Version="9.8.4-nightly-00189" />
+	</ItemGroup>
+	
+	<!--#endif -->
+	<!--#if (UseVoiceNatives) -->
+	<ItemGroup>
+		<PackageReference Include="DisCatSharp.VoiceNext.Natives" Version="9.8.4-nightly-00189" />
+	</ItemGroup>
+	
+	<!--#endif -->
+</Project>
