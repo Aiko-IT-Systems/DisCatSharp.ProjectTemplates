@@ -1,10 +1,10 @@
 {
   "$schema": "http://json.schemastore.org/template",
-  "author": "Jon Braunsma Jr",
+  "author": "Badger",
   
   "classifications": [ "Console" ],
   
-  "name": "DisCatSharp Web Hosted Bot Template",
+  "name": "DisCatSharp Bot Template",
   "identity": "DisCatSharp.WebHost.Bot.Template",
   "shortName": "DCSWebHostBot",
   

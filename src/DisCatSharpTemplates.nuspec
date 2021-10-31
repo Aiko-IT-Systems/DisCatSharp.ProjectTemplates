@@ -6,7 +6,7 @@
     <description>
       Project Template Pack for DisCatSharp Hosting
     </description>
-    <authors>Jon Braunsma Jr</authors>
+    <authors>Jon Braunsma Jr | Badger</authors>
     <license type="expression">Apache-2.0</license>
     <packageTypes>
       <packageType name="Template" />

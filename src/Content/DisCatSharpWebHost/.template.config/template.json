@@ -1,21 +1,48 @@
 {
   "$schema": "http://json.schemastore.org/template",
-  "author": "Jon Braunsma Jr",
+  "author": "Badger",
   "classifications": [ "Console" ],
-  "name": "DisCatSharp Web Host Template",
-  "identity": "DisCatSharp.WebHost.Template",
-  "shortName": "DCSWebHost",
+  "name": "DisCatSharp Web App Template",
+  "identity": "DisCatSharp.WebApp.Template",
+  "shortName": "DCSWebApp",
+
   "tags": {
     "language": "C#",
     "type": "project"
   },
+
   "sourceName": "DisCatSharpWebHost",
   "defaultName": "DisCatSharpWebHost",
+
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!UseNet6)",
+          "exclude": [
+            "Global.cs",
+            "Program.cs"
+          ],
+          "rename": {
+            "Program5.cs": "Program.cs"
+          }
+        },
+        {
+          "condition": "(UseNet6)",
+          "exclude": [
+            "Program5.cs",
+            "Startup.cs"
+          ]
+        }
+      ]
+    }
+  ],
+
   "symbols": {
     "Framework": {
       "type": "parameter",
       "description": "The target framework for the project",
-      "datatype": "choice",      
+      "datatype": "choice",
       "choices": [
         {
           "choice": "net5.0",
@@ -28,6 +55,11 @@
       ],
       "replaces": "net6.0",
       "defaultValue": "net6.0"
+    },
+
+    "UseNet6": {
+      "type": "computed",
+      "value": "(Framework == \"net6.0\")"
     }
   }
 }
