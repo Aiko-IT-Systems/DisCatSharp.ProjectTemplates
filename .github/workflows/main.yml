@@ -29,5 +29,5 @@ jobs:
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
           nuget-version: '5.x'
-      - run: nuget pack ./src/DisCatSharpTemplates.nuspec .
+      - run: nuget pack $(find . -name "DisCatSharpTemplates.nuspec")
       - run: nuget push ./*.nupkg
