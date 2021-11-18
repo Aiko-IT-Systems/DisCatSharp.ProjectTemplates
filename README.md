@@ -12,13 +12,6 @@ allow you to use the extension methods provided in `ServiceCollectionExtensions`
 ## WIP: Web Host
 Contains the skeleton of your typical web project. Adding support for MVC / API is in progress.
 
-# Installation 
-
-Run the following command in your terminal to install the templates.
-```
-dotnet new -i DisCatSharp.Hosting.ProjectTemplates
-```
-
 
 # **Important** 
 Rider currently **DOES NOT** support parameters in custom projects. So unfortunately, anyone who wants to use these templates with Rider
