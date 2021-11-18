@@ -13,6 +13,7 @@
     </packageTypes>
 	<projectUrl>https://github.com/JBraunsmaJr/DisCatSharp.Hosting.Templates</projectUrl>
 	<title>DisCatSharp Hosting Template Pack</title>
+	<iconUrl>https://raw.githubusercontent.com/Aiko-IT-Systems/DisCatSharp/main/DisCatSharp.Logos/logobig.png</iconUrl>
   </metadata>
   <files>
     <file src="Content\**\*.*" exclude="Content\**\bin\**\*.*;Content\**\obj\**\*.*" target="Content" />
