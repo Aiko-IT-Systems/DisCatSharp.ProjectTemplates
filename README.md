@@ -1,7 +1,6 @@
-# DisCatSharp.Hosting.ProjectTemplates
+# DisCatSharp.ProjectTemplates
 
-Supporting [DisCatSharp](https://github.com/Aiko-IT-Systems/DisCatSharp)'s library. These project templates serve as a starting point for 
-creating your Discord bot(s) in C#!
+These project templates serve as a starting point for creating your Discord bot(s) in C#!
 
 ## Web Host Bot (Class Library)
 Allows you, the developer, to pick and choose which modules you'd like to include from [DisCatSharp](https://github.com/Aiko-IT-Systems/DisCatSharp) then sets up
