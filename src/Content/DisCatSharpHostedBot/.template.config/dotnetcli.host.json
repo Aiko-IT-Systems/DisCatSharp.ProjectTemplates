@@ -8,6 +8,10 @@
   ],
 
   "symbolInfo": {
+    "DiscordToken": {
+      "longName": "discord-token",
+      "shortName": "dt"
+    },
     "UseApplicationCommands": {
       "longName": "use-application-commands",
       "shortName": "uac"

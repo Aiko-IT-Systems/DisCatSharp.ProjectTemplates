@@ -12,6 +12,7 @@ var builder = WebApplication
     Or you just want to load certain things from environment.... 
  */
 builder.Configuration.AddEnvironmentVariables();
+//builder.Services.AddBotConfiguration();
 
 /* 
     Ideally your Discord Token should be stored outside of your project (not in source control)

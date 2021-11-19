@@ -8,8 +8,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "template files", "template files", "{CBE6C0D9-6459-4E21-AAF5-4F08C989D215}"
 	ProjectSection(SolutionItems) = preProject
 		..\build-nuget.ps1 = ..\build-nuget.ps1
+		..\clean.ps1 = ..\clean.ps1
 		DisCatSharpTemplates.nuspec = DisCatSharpTemplates.nuspec
 		..\README.md = ..\README.md
+		..\reset-templates.ps1 = ..\reset-templates.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web Host Template files", "Web Host Template files", "{B0A14200-1C7A-4694-8A14-DC3B48F0A7EC}"
@@ -26,6 +28,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discord Template Files", "D
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisCatSharpHostedBot", "Content\DisCatSharpHostedBot\DisCatSharpHostedBot.csproj", "{8EBEB697-0E13-4BAA-BE76-12DAD2464C0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "powershell", "powershell", "{8E83CD51-B4D1-4A25-9206-23BD44C4136A}"
+	ProjectSection(SolutionItems) = preProject
+		..\build-nuget.ps1 = ..\build-nuget.ps1
+		..\clean.ps1 = ..\clean.ps1
+		..\reset-templates.ps1 = ..\reset-templates.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +57,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B0A14200-1C7A-4694-8A14-DC3B48F0A7EC} = {CBE6C0D9-6459-4E21-AAF5-4F08C989D215}
 		{D4CD91B8-51AC-419A-8423-0DBD61D01E77} = {CBE6C0D9-6459-4E21-AAF5-4F08C989D215}
+		{8E83CD51-B4D1-4A25-9206-23BD44C4136A} = {CBE6C0D9-6459-4E21-AAF5-4F08C989D215}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E94E7A45-FD8A-44B2-A390-AA3DC8AA1BC2}

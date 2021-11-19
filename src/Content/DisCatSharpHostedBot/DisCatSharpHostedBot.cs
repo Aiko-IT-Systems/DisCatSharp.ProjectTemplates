@@ -3,28 +3,8 @@ internal class DisCatSharpHostedBot : DiscordHostedService, IDisCatSharpHostedBo
 {
     public DisCatSharpHostedBot(IConfiguration config,
         ILogger<DisCatSharpHostedBot> logger,
-        IServiceProvider provider, IHostApplicationLifetime lifetime) : base(config, logger, provider, lifetime, "DisCatSharpHostedBot")
-    {
-        /*
-           IF YOU DO NOT WANT TO USE THE ICONFIGURATION APPROACH
-           You can still register your extensions here
-           
-           Do note though, the IConfiguration is basically an aggregate... you can
-           have config-based data come from numerous sources...
-           
-           Environment variables
-           multiple json files
-           xml
-         */
-
-#if (UseApplicationCommands)
-        var commandsExtension = this.Client.UseApplicationCommands(new()
-        {
-            Services = provider
-        });
-        RegisterCommands(commandsExtension);
-#endif
-    }
+        IServiceProvider provider, 
+        IHostApplicationLifetime lifetime) : base(config, logger, provider, lifetime, "DisCatSharpHostedBot"){}
 
 #if (UseApplicationCommands)
     /// <summary>
@@ -40,6 +20,30 @@ internal class DisCatSharpHostedBot : DiscordHostedService, IDisCatSharpHostedBo
             Logger.LogInformation($"Registered the following command classes: \n\t{string.Join("\n\t", registeredTypes)}");
     }
 #endif
+
+    protected override Task ConfigureExtensionsAsync()
+    {
+        base.ConfigureExtensionsAsync();
+
+        /*
+           IF YOU DO NOT WANT TO USE THE ICONFIGURATION APPROACH
+           You can still register your extensions here
+           
+           Do note though, the IConfiguration is basically an aggregate... you can
+           have config-based data come from numerous sources...
+           
+           Environment variables
+           multiple json files
+           xml
+         */
+
+#if (UseApplicationCommands)
+        var commandsExtension = this.Client.UseApplicationCommands(new(this.ServiceProvider));
+        RegisterCommands(commandsExtension);
+#endif
+
+        return Task.CompletedTask;
+    }
 
     /// <summary>
     /// Could invoke this outside of the bot project, consume it from a web app or whoever

@@ -12,7 +12,8 @@ public static class DisCatSharpHostedBotServiceCollectionExtensions
     /// <returns>Reference to <paramref name="config"/> for chaining purposes</returns>
     public static IConfigurationBuilder AddDisCatSharpHostedBotConfiguration(this IConfigurationBuilder config)
     {
-        config.AddJsonFile("DisCatSharpHostedBot.settings.json");
+        string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DisCatSharpHostedBot.settings.json");        
+        config.AddJsonFile(path);
         return config;
     }
 

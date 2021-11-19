@@ -33,14 +33,14 @@ Clean
 $outputpath = Join-Path $scriptDir nupkg
 $pathtonuspec = Join-Path $srcDir DisCatsharpTemplates.nuspec
 if(Test-Path $pathtonuspec){
-    nuget.exe pack $pathtonuspec -OutputDirectory $outputpath
+    nuget pack $pathtonuspec -OutputDirectory $outputpath
 }
 else{
     'ERROR: nuspec file not found at {0}' -f $pathtonuspec | Write-Error
     return
 }
 
-$pathtonupkg = join-path $scriptDir nupkg/DisCatSharp.Hosting.ProjectTemplates.1.0.1.nupkg
+$pathtonupkg = join-path $scriptDir nupkg/DisCatSharp.ProjectTemplates.1.0.1.nupkg
 # install nuget package using dotnet new --install
 if(test-path $pathtonupkg){   
     Reset-Templates

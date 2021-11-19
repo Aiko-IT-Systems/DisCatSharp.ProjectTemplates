@@ -13,7 +13,7 @@
     ],
 
     "Discord": {
-       "Token": ""
+      "Token": "DISCORD_TOKEN"
     }    
   }
 }

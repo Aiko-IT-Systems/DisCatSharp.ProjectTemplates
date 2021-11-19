@@ -17,6 +17,13 @@
   "defaultName": "DisCatSharpHostedBot",
 
   "symbols": {
+    "DiscordToken": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Token provided to you via Discord's Developer Portal",
+      "replaces": "DISCORD_TOKEN"
+    },
+
     "UseApplicationCommands": {
       "type": "parameter",
       "datatype": "bool",
