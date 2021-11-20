@@ -2,7 +2,7 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Badger",
 
-  "classifications": [ "Console", "Library" ],
+  "classifications": [ "Console", "Library", "Bot", "Discord" ],
 
   "name": "DisCatSharp Bot Template",
   "identity": "DisCatSharp.Bot.Template",
