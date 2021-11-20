@@ -3,37 +3,52 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31815.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisCatSharpProject.Web", "Content\DisCatSharpWebHost\DisCatSharpProject.Web.csproj", "{DAF9FCC3-3CBE-4B81-B32C-970605EA1D4A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "template files", "template files", "{CBE6C0D9-6459-4E21-AAF5-4F08C989D215}"
 	ProjectSection(SolutionItems) = preProject
 		..\build-nuget.ps1 = ..\build-nuget.ps1
 		..\clean.ps1 = ..\clean.ps1
 		DisCatSharpTemplates.nuspec = DisCatSharpTemplates.nuspec
 		..\README.md = ..\README.md
-		..\reset-templates.ps1 = ..\reset-templates.ps1
+		..\update-solution-template.ps1 = ..\update-solution-template.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web Host Template files", "Web Host Template files", "{B0A14200-1C7A-4694-8A14-DC3B48F0A7EC}"
 	ProjectSection(SolutionItems) = preProject
-		Content\DisCatSharpWebHost\.template.config\ide.host.json = Content\DisCatSharpWebHost\.template.config\ide.host.json
-		Content\DisCatSharpWebHost\.template.config\template.json = Content\DisCatSharpWebHost\.template.config\template.json
+		Content\DisCatSharpProjectWeb\.template.config\ide.host.json = Content\DisCatSharpProjectWeb\.template.config\ide.host.json
+		Content\DisCatSharpProjectWeb\.template.config\template.json = Content\DisCatSharpProjectWeb\.template.config\template.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discord Template Files", "Discord Template Files", "{D4CD91B8-51AC-419A-8423-0DBD61D01E77}"
 	ProjectSection(SolutionItems) = preProject
-		Content\DisCatSharpHostedBot\.template.config\dotnetcli.host.json = Content\DisCatSharpHostedBot\.template.config\dotnetcli.host.json
-		Content\DisCatSharpHostedBot\.template.config\ide.host.json = Content\DisCatSharpHostedBot\.template.config\ide.host.json
-		Content\DisCatSharpHostedBot\.template.config\template.json = Content\DisCatSharpHostedBot\.template.config\template.json
+		Content\DisCatSharpProjectBot\.template.config\dotnet.cli.json = Content\DisCatSharpProjectBot\.template.config\dotnet.cli.json
+		Content\DisCatSharpProjectBot\.template.config\dotnetcli.host.json = Content\DisCatSharpProjectBot\.template.config\dotnetcli.host.json
+		Content\DisCatSharpProjectBot\.template.config\ide.host.json = Content\DisCatSharpProjectBot\.template.config\ide.host.json
+		Content\DisCatSharpProjectBot\.template.config\template.json = Content\DisCatSharpProjectBot\.template.config\template.json
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisCatSharpProject.Bot", "Content\DisCatSharpHostedBot\DisCatSharpProject.Bot.csproj", "{8EBEB697-0E13-4BAA-BE76-12DAD2464C0B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "powershell", "powershell", "{8E83CD51-B4D1-4A25-9206-23BD44C4136A}"
 	ProjectSection(SolutionItems) = preProject
 		..\build-nuget.ps1 = ..\build-nuget.ps1
 		..\clean.ps1 = ..\clean.ps1
 		..\reset-templates.ps1 = ..\reset-templates.ps1
+		..\update-solution-template.ps1 = ..\update-solution-template.ps1
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisCatSharpProject.Bot", "Content\DisCatSharpProjectBot\DisCatSharpProject.Bot.csproj", "{ECB4AFCB-EFDF-49BA-A744-811C6F9A7AB1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisCatSharpProject.Web", "Content\DisCatSharpProjectWeb\DisCatSharpProject.Web.csproj", "{2858083F-9AB5-4D91-82A8-629161CF45F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Template Files", "Solution Template Files", "{D6D3BBC8-0CC5-41BD-B75D-D8D7D7730D4D}"
+	ProjectSection(SolutionItems) = preProject
+		Content\DisCatSharpSolution\.template.config\dotnet.cli.json = Content\DisCatSharpSolution\.template.config\dotnet.cli.json
+		Content\DisCatSharpSolution\.template.config\dotnetcli.host.json = Content\DisCatSharpSolution\.template.config\dotnetcli.host.json
+		Content\DisCatSharpSolution\.template.config\ide.host.json = Content\DisCatSharpSolution\.template.config\ide.host.json
+		Content\DisCatSharpSolution\.template.config\template.json = Content\DisCatSharpSolution\.template.config\template.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Template", "Solution Template", "{F80A4322-F8AF-4916-8285-F2B543F391B8}"
+	ProjectSection(SolutionItems) = preProject
+		Content\DisCatSharpSolution\DisCatSharpProject.sln = Content\DisCatSharpSolution\DisCatSharpProject.sln
 	EndProjectSection
 EndProject
 Global
@@ -42,14 +57,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DAF9FCC3-3CBE-4B81-B32C-970605EA1D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DAF9FCC3-3CBE-4B81-B32C-970605EA1D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DAF9FCC3-3CBE-4B81-B32C-970605EA1D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DAF9FCC3-3CBE-4B81-B32C-970605EA1D4A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8EBEB697-0E13-4BAA-BE76-12DAD2464C0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8EBEB697-0E13-4BAA-BE76-12DAD2464C0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8EBEB697-0E13-4BAA-BE76-12DAD2464C0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8EBEB697-0E13-4BAA-BE76-12DAD2464C0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECB4AFCB-EFDF-49BA-A744-811C6F9A7AB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECB4AFCB-EFDF-49BA-A744-811C6F9A7AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECB4AFCB-EFDF-49BA-A744-811C6F9A7AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECB4AFCB-EFDF-49BA-A744-811C6F9A7AB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2858083F-9AB5-4D91-82A8-629161CF45F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2858083F-9AB5-4D91-82A8-629161CF45F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2858083F-9AB5-4D91-82A8-629161CF45F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2858083F-9AB5-4D91-82A8-629161CF45F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +73,7 @@ Global
 		{B0A14200-1C7A-4694-8A14-DC3B48F0A7EC} = {CBE6C0D9-6459-4E21-AAF5-4F08C989D215}
 		{D4CD91B8-51AC-419A-8423-0DBD61D01E77} = {CBE6C0D9-6459-4E21-AAF5-4F08C989D215}
 		{8E83CD51-B4D1-4A25-9206-23BD44C4136A} = {CBE6C0D9-6459-4E21-AAF5-4F08C989D215}
+		{D6D3BBC8-0CC5-41BD-B75D-D8D7D7730D4D} = {CBE6C0D9-6459-4E21-AAF5-4F08C989D215}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E94E7A45-FD8A-44B2-A390-AA3DC8AA1BC2}

@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json.schemastore.org/dotnetcli.host",
+
+  "usageExamples": [
+    "--use-application-commands true",
+    "-uac false -ul true",
+    "--use-interactivity false"
+  ],
+
+  "symbolInfo": {
+    "UseApplicationCommands": {
+      "longName": "use-application-commands",
+      "shortName": "uac"
+    },
+
+    "UseCommands": {
+      "longName": "use-commands",
+      "shortName": "ucomm"
+    },
+
+    "UseCommon": {
+      "longName": "use-common",
+      "shortName": "uc"
+    },
+
+    "UseInteractivity": {
+      "longName": "use-interactivity",
+      "shortName": "ui"
+    },
+
+    "UseLavalink": {
+      "longName": "use-lavalink",
+      "shortName": "ul"
+    },
+
+    "UseVoice": {
+      "longName": "use-voice",
+      "shortName": "uv"
+    },
+
+    "UseVoiceNatives": {
+      "longName": "use-voice-natives",
+      "shortName": "uvn"
+
+    }
+  }
+}
