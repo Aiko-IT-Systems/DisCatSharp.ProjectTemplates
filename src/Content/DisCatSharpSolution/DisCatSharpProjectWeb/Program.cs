@@ -14,7 +14,7 @@ var builder = WebApplication
 builder.Configuration.AddEnvironmentVariables();
 
 #if (IncludeBot)
-builder.Configuration.AddDisCatSharpProjectBotConfiguration();
+builder.Services.AddDisCatSharpProjectBotConfiguration();
 #endif
 //builder.Services.AddBotConfiguration();
 

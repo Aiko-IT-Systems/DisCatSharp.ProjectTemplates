@@ -24,7 +24,8 @@ function Clean(){
     }
 }
 
-
+# we need to ensure our solution template is generated / updated prior to final package
+Start-Process powershell "$scriptDir\update-solution-template.ps1"
 
 # start script
 Clean
@@ -40,7 +41,7 @@ else{
     return
 }
 
-$pathtonupkg = join-path $scriptDir nupkg/DisCatSharp.ProjectTemplates.1.0.1.nupkg
+$pathtonupkg = join-path $scriptDir nupkg/DisCatSharp.ProjectTemplates.1.0.2.nupkg
 # install nuget package using dotnet new --install
 if(test-path $pathtonupkg){   
     Reset-Templates

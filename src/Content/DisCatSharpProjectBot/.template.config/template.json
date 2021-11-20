@@ -2,11 +2,11 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Badger",
 
-  "classifications": [ "Console" ],
+  "classifications": [ "Console", "Library" ],
 
   "name": "DisCatSharp Bot Template",
-  "identity": "DisCatSharp.WebHost.Bot.Template",
-  "shortName": "DCSWebHostBot",
+  "identity": "DisCatSharp.Bot.Template",
+  "shortName": "DCSBot",
 
   "tags": {
     "language": "C#",

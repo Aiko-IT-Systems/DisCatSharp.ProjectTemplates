@@ -6,10 +6,23 @@ $solutionDir = Join-Path $scriptDir "src\Content\DisCatSharpSolution"
 $contentDir = Join-Path $scriptDir "src\Content"
 
 # projects we need to cleanup
-foreach ($projectName in "DisCatSharProjectBot", "DisCatSharProjectWeb")
+foreach ($projectName in "DisCatSharpProjectBot", "DisCatSharpProjectWeb")
 {
-	$removeDir = Join-Path $solutionDir $projectName
+	$destinationDir = Join-Path $solutionDir $projectName
 	$copyDir = Join-Path $contentDir $projectName
+	$templateFolder = Join-Path $destinationDir ".template.config"
 
+	if (Test-Path -LiteralPath $destinationDir)
+	{
+		Write-Host "Removing Old $projectName from Solution Output..."
+		Remove-Item -Recurse -Force $destinationDir
+	}
+	
+	Write-Host "Copying $projectName into Solution Output..."
+	New-Item -Path $destinationDir -ItemType Directory
+	Copy-Item -Path $copyDir -Destination $solutionDir -Recurse -Force
 
+	Remove-Item -Recurse -Force "$destinationDir\.template.config"
+	Remove-Item -Recurse -Force "$destinationDir\bin"
+	Remove-Item -Recurse -Force "$destinationDir\obj"
 }

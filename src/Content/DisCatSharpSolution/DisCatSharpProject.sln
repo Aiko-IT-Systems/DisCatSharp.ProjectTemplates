@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisCatSharpProject.Bot", "DisCatSharpProject.Bot\DisCatSharpProject.Bot.csproj", "{0E62310C-D76A-4681-9926-B1BFFDC379FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisCatSharpProject.Bot", "DisCatSharpProjectBot\DisCatSharpProject.Bot.csproj", "{0E62310C-D76A-4681-9926-B1BFFDC379FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisCatSharpProject.Web", "DisCatSharpProject.Web\DisCatSharpProject.Web.csproj", "{032123E7-E4E0-4B17-9564-ECA4B57F30B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisCatSharpProject.Web", "DisCatSharpProjectWeb\DisCatSharpProject.Web.csproj", "{032123E7-E4E0-4B17-9564-ECA4B57F30B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

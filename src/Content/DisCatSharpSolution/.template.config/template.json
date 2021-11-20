@@ -16,7 +16,7 @@
   "sourceName": "DisCatSharpProject",
   "defaultName": "DisCatSharpProject",
 
-  "preferNameDirectory": true,
+  "preferNameDirectory": false,
 
   "guids": [
     "0E62310C-D76A-4681-9926-B1BFFDC379FC",
