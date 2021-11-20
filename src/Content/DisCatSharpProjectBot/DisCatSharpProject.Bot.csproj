@@ -7,52 +7,52 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp" Version="9.8.4-nightly-*" />
-		<PackageReference Include="DisCatSharp.Configuration" Version="9.8.4-nightly-*" />
-		<PackageReference Include="DisCatSharp.Hosting" Version="9.8.4-nightly-*" />
-		<PackageReference Include="DisCatSharp.Hosting.DependencyInjection" Version="9.8.4-nightly-*" />
+		<PackageReference Include="DisCatSharp" Version="9.8.4" />
+		<PackageReference Include="DisCatSharp.Configuration" Version="9.8.4" />
+		<PackageReference Include="DisCatSharp.Hosting" Version="9.8.4" />
+		<PackageReference Include="DisCatSharp.Hosting.DependencyInjection" Version="9.8.4" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
 	</ItemGroup>
 
 	<!--#if (UseApplicationCommands) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.ApplicationCommands" Version="9.8.4-nightly-*" />
+		<PackageReference Include="DisCatSharp.ApplicationCommands" Version="9.8.4" />
 	</ItemGroup>
 	
 	<!--#endif -->
 	<!--#if (UseCommands) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.CommandsNext" Version="9.8.4-nightly-*" />
+		<PackageReference Include="DisCatSharp.CommandsNext" Version="9.8.4" />
 	</ItemGroup>
 
 	<!--#endif -->
 	<!--#if (UseCommon) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.Common" Version="9.8.4-nightly-*" />
+		<PackageReference Include="DisCatSharp.Common" Version="9.8.4" />
 	</ItemGroup>
 
 	<!--#endif -->
 	<!--#if (UseInteractivity) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.Interactivity" Version="9.8.4-nightly-*" />
+		<PackageReference Include="DisCatSharp.Interactivity" Version="9.8.4" />
 	</ItemGroup>
 	
 	<!--#endif -->
 	<!--#if (UseLavalink) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.Lavalink" Version="9.8.4-nightly-*" />
+		<PackageReference Include="DisCatSharp.Lavalink" Version="9.8.4" />
 	</ItemGroup>
 	
 	<!--#endif -->
 	<!--#if (UseVoice) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.VoiceNext" Version="9.8.4-nightly-*" />
+		<PackageReference Include="DisCatSharp.VoiceNext" Version="9.8.4" />
 	</ItemGroup>
 	
 	<!--#endif -->
 	<!--#if (UseVoiceNatives) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.VoiceNext.Natives" Version="9.8.4-nightly-*" />
+		<PackageReference Include="DisCatSharp.VoiceNext.Natives" Version="9.8.4" />
 	</ItemGroup>
 	
 	<!--#endif -->
