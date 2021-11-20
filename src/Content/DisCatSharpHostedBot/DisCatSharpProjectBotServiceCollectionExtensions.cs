@@ -6,25 +6,25 @@ namespace DisCatSharpProject.Bot;
 public static class DisCatSharpProjectBotServiceCollectionExtensions
 {
     /// <summary>
-    /// Include DisCatSharpHostedBot's configuration file
+    /// Include DisCatSharpProjectBot's configuration file
     /// </summary>
     /// <param name="config"></param>
     /// <returns>Reference to <paramref name="config"/> for chaining purposes</returns>
-    public static IConfigurationBuilder AddDisCatSharpHostedBotConfiguration(this IConfigurationBuilder config)
+    public static IConfigurationBuilder AddDisCatSharpProjectBotConfiguration(this IConfigurationBuilder config)
     {
-        string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DisCatSharpHostedBot.settings.json");        
+        string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DisCatSharpProjectBot.settings.json");        
         config.AddJsonFile(path);
         return config;
     }
 
     /// <summary>
-    /// Add DisCatSharpHostedBot into the Dependency Injection Pipeline
+    /// Add DisCatSharpProjectBot into the Dependency Injection Pipeline
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddDisCatSharpHostedBotServices(this IServiceCollection services)
+    public static IServiceCollection AddDisCatSharpProijectBotServices(this IServiceCollection services)
     {
-        services.AddDiscordHostedService<IDisCatSharpHostedBot, DisCatSharpHostedBot>();
+        services.AddDiscordHostedService<IDisCatSharpProjectBot, DisCatSharpProjectBot>();
         return services;
     }
 

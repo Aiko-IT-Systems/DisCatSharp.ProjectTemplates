@@ -15,7 +15,9 @@
   "defaultName": "DisCatSharpWebHost",
 
   "symbols": {
-    
-
+    "IncludeBot": {
+      "type": "computed",
+      "value": "false"
+    }
   }
 }

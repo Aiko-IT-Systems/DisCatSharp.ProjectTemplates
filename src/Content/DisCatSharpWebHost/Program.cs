@@ -12,6 +12,10 @@ var builder = WebApplication
     Or you just want to load certain things from environment.... 
  */
 builder.Configuration.AddEnvironmentVariables();
+
+#if (IncludeBot)
+builder.Services.AddDisCatSharpProjectBotConfiguration();
+#endif
 //builder.Services.AddBotConfiguration();
 
 /* 
@@ -51,6 +55,9 @@ builder.Services.AddLogging();
  */
 
 //builder.Services.AddBotServices();
+#if (IncludeBot)
+builder.Services.AddDisCatSharpProijectBotServices();
+#endif
 
 // Still have the functionality of a website 
 var app = builder.Build();
