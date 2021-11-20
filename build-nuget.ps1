@@ -1,3 +1,7 @@
+param(
+    [Parameter(Mandatory=$false,Position=1)][bool]$installTemplates=$false
+)
+
 $scriptDir = split-path -parent $MyInvocation.MyCommand.Definition
 $srcDir = (Join-Path -path $scriptDir src)
 $original = (Join-Path -path $srcDir "DisCatSharpTemplates.nuspec")
@@ -65,15 +69,18 @@ else{
     return
 }
 
-$pathtonupkg = join-path $scriptDir "nupkg/DisCatSharp.ProjectTemplates.$tag.nupkg"
-# install nuget package using dotnet new --install
-if(test-path $pathtonupkg){   
-    Reset-Templates
-    'installing template with command "dotnet new --install {0}"' -f $pathtonupkg | write-host
-    &dotnet new --install $pathtonupkg
-}
-else{
-    'Not installing template because it was not found at "{0}"' -f $pathtonupkg | Write-Error
+# If the user wants to install the templates they must pass in a true value
+if($installTemplates){
+    $pathtonupkg = join-path $scriptDir "nupkg/DisCatSharp.ProjectTemplates.$tag.nupkg"
+    # install nuget package using dotnet new --install
+    if(test-path $pathtonupkg){   
+        Reset-Templates
+        'installing template with command "dotnet new --install {0}"' -f $pathtonupkg | write-host
+        &dotnet new --install $pathtonupkg
+    }
+    else{
+        'Not installing template because it was not found at "{0}"' -f $pathtonupkg | Write-Error
+    }
 }
 
 ResetSpec
