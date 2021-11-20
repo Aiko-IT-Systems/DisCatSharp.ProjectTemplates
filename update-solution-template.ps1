@@ -2,8 +2,8 @@
 $scriptDir = split-path -parent $MyInvocation.MyCommand.Definition
 
 # this is the solution directory - where we will copy/update our template
-$solutionDir = Join-Path $scriptDir "src\Content\DisCatSharpSolution"
-$contentDir = Join-Path $scriptDir "src\Content"
+$solutionDir = Join-Path $scriptDir "src/Content/DisCatSharpSolution"
+$contentDir = Join-Path $scriptDir "src/Content"
 
 # projects we need to cleanup
 foreach ($projectName in "DisCatSharpProjectBot", "DisCatSharpProjectWeb")
@@ -22,7 +22,7 @@ foreach ($projectName in "DisCatSharpProjectBot", "DisCatSharpProjectWeb")
 	New-Item -Path $destinationDir -ItemType Directory
 	Copy-Item -Path $copyDir -Destination $solutionDir -Recurse -Force
 
-	Remove-Item -Recurse -Force "$destinationDir\.template.config"
-	Remove-Item -Recurse -Force "$destinationDir\bin"
-	Remove-Item -Recurse -Force "$destinationDir\obj"
+	Remove-Item -Recurse -Force "$destinationDir/.template.config"
+	Remove-Item -Recurse -Force "$destinationDir/bin"
+	Remove-Item -Recurse -Force "$destinationDir/obj"
 }
