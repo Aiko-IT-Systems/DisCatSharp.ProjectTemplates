@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discord Template Files", "D
 		Content\DisCatSharpHostedBot\.template.config\template.json = Content\DisCatSharpHostedBot\.template.config\template.json
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisCatSharpHostedBot", "Content\DisCatSharpHostedBot\DisCatSharpHostedBot.csproj", "{8EBEB697-0E13-4BAA-BE76-12DAD2464C0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisCatSharpProject.Bot", "Content\DisCatSharpHostedBot\DisCatSharpProject.Bot.csproj", "{8EBEB697-0E13-4BAA-BE76-12DAD2464C0B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "powershell", "powershell", "{8E83CD51-B4D1-4A25-9206-23BD44C4136A}"
 	ProjectSection(SolutionItems) = preProject

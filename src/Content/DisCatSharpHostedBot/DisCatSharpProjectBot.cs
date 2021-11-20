@@ -1,14 +1,14 @@
-﻿namespace DisCatSharpHostedBot;
-internal class DisCatSharpHostedBot : DiscordHostedService, IDisCatSharpHostedBot
+﻿namespace DisCatSharpProject.Bot;
+internal class DisCatSharpProjectBot : DiscordHostedService, IDisCatSharpProjectBot
 {
-    public DisCatSharpHostedBot(IConfiguration config,
-        ILogger<DisCatSharpHostedBot> logger,
+    public DisCatSharpProjectBot(IConfiguration config,
+        ILogger<DisCatSharpProjectBot> logger,
         IServiceProvider provider, 
-        IHostApplicationLifetime lifetime) : base(config, logger, provider, lifetime, "DisCatSharpHostedBot"){}
+        IHostApplicationLifetime lifetime) : base(config, logger, provider, lifetime, "DisCatSharpProjectBot") {}
 
 #if (UseApplicationCommands)
     /// <summary>
-    /// Attempts to register commands from our DisCatSharpHostedBot Project
+    /// Attempts to register commands from our DisCatSharpProject.Bot Project
     /// </summary>
     void RegisterCommands(ApplicationCommandsExtension commandsExtension)
     {

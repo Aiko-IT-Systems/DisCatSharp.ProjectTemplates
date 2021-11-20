@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace DisCatSharpHostedBot.Commands;
+namespace DisCatSharpProject.Bot.Commands;
 internal class DependencyInjectionCommands : ApplicationCommandsModule
 {
     #region Dependency Injection

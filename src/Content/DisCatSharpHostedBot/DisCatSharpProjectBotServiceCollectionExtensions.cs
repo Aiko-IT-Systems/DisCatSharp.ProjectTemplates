@@ -2,8 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace DisCatSharpHostedBot;
-public static class DisCatSharpHostedBotServiceCollectionExtensions
+namespace DisCatSharpProject.Bot;
+public static class DisCatSharpProjectBotServiceCollectionExtensions
 {
     /// <summary>
     /// Include DisCatSharpHostedBot's configuration file

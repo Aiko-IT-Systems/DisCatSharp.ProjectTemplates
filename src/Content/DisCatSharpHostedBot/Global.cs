@@ -10,7 +10,7 @@ global using DisCatSharp.Entities;
 global using DisCatSharp.Hosting;
 #endregion
 
-global using DisCatSharpHostedBot;
+global using DisCatSharpProject.Bot;
 
 #region Microsoft Stuff
 global using System;

@@ -1,4 +1,4 @@
-﻿namespace DisCatSharpHostedBot.Commands;
+﻿namespace DisCatSharpProject.Bot.Commands;
 internal class ServerCommands : ApplicationCommandsModule
 {
     [SlashCommand("ping", "Retrieve server ping")]

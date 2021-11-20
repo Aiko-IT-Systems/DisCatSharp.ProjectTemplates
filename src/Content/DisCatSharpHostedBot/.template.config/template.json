@@ -1,21 +1,21 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Badger",
-  
+
   "classifications": [ "Console" ],
-  
+
   "name": "DisCatSharp Bot Template",
   "identity": "DisCatSharp.WebHost.Bot.Template",
   "shortName": "DCSWebHostBot",
-  
+
   "tags": {
     "language": "C#",
     "type": "project"
   },
 
-  "sourceName": "DisCatSharpHostedBot",
-  "defaultName": "DisCatSharpHostedBot",
-
+  "sourceName": "DisCatSharpProject",
+  "defaultName": "DisCatSharpProject",
+  
   "symbols": {
     "DiscordToken": {
       "type": "parameter",

@@ -1,19 +1,19 @@
 ﻿{
-  "DisCatSharpHostedBot": {
+  "DisCatSharpProjectBot": {
     "Using": [
       //#if (UseInteractivity)
-        "DisCatSharp.Interactivitiy",
+      "DisCatSharp.Interactivitiy",
       //#endif
       //#if (UseLavalink)
-        "DisCatSharp.Lavalink",
+      "DisCatSharp.Lavalink",
       //#endif
       //#if (UseVoice)
-        "DisCatSharp.VoiceNext",
+      "DisCatSharp.VoiceNext"
       //#endif
     ],
 
     "Discord": {
       "Token": "DISCORD_TOKEN"
-    }    
+    }
   }
 }
