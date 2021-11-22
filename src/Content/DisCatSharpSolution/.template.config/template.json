@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Badger",
+
+  "classifications": [ "Web", "Solution", "Bot", "Discord" ],
+
+  "name": "DisCatSharp Solution Template",
+  "identity": "DisCatSharp.Solution.Template",
+  "shortName": "DCSSolution",
+
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+
+  "sourceName": "DisCatSharpProject",
+  "defaultName": "DisCatSharpProject",
+
+  "preferNameDirectory": false,
+
+  "guids": [
+    "0E62310C-D76A-4681-9926-B1BFFDC379FC",
+    "032123E7-E4E0-4B17-9564-ECA4B57F30B7"
+  ],
+
+  "symbols": {
+    "DiscordToken": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Token provided to you via Discord's Developer Portal",
+      "replaces": "DISCORD_TOKEN"
+    },
+
+    "UseApplicationCommands": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Does your bot use the DisCatSharp.ApplicationCommands module?"
+    },
+
+    "UseCommands": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Does your bot use the DisCatSharp.Commands module?"
+    },
+
+    "UseCommon": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Does your bot use the DisCatSharp.Common module?"
+    },
+
+    "UseInteractivity": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Does your bot use the DisCatSharp.Interactivity module?"
+    },
+
+    "UseLavalink": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Does your bot use the DisCatSharp.Lavalink module?"
+    },
+
+    "UseVoice": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Does your bot use the DisCatSharp.VoiceNext module?"
+    },
+
+    "UseVoiceNatives": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Does your bot use the DisCatSharp.VoiceNext.Natives module?"
+    },
+
+    "IncludeBot": {
+      "type": "computed",
+      "value": "true"
+    }
+  }
+}

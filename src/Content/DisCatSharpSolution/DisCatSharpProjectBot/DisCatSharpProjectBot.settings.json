@@ -1,0 +1,19 @@
+﻿{
+  "DisCatSharpProjectBot": {
+    "Using": [
+      //#if (UseInteractivity)
+      "DisCatSharp.Interactivitiy",
+      //#endif
+      //#if (UseLavalink)
+      "DisCatSharp.Lavalink",
+      //#endif
+      //#if (UseVoice)
+      "DisCatSharp.VoiceNext"
+      //#endif
+    ],
+
+    "Discord": {
+      "Token": "DISCORD_TOKEN"
+    }
+  }
+}

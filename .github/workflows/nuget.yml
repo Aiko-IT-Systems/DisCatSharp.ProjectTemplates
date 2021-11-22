@@ -1,0 +1,21 @@
+name: NuGet
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+          nuget-version: '5.x'
+      - uses: Amadevus/pwsh-script@v2
+        id: script
+        with:
+          script: ./build-nuget.ps1
+      - run: nuget push -src "https://www.nuget.org/api/v2/package" $(find . -name "*ProjectTemplates*.nupkg")

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>DisCatSharp.Hosting.ProjectTemplates</id>
-    <version>1.0.2</version>
+    <id>DisCatSharp.ProjectTemplates</id>
+    <version>%VERSION%</version>
     <description>
       Project Template Pack for DisCatSharp Hosting
     </description>
@@ -11,8 +11,8 @@
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
-	<projectUrl>https://github.com/JBraunsmaJr/DisCatSharp.Hosting.Templates</projectUrl>
-	<title>DisCatSharp Hosting Template Pack</title>
+	<projectUrl>https://github.com/Aiko-IT-Systems/DisCatSharp.ProjectTemplates</projectUrl>
+	<title>DisCatSharp Project Template Pack</title>
 	<iconUrl>https://raw.githubusercontent.com/Aiko-IT-Systems/DisCatSharp/main/DisCatSharp.Logos/logobig.png</iconUrl>
   </metadata>
   <files>

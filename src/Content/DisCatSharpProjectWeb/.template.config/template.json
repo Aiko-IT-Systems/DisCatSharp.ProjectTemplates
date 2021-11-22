@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Badger",
+  "classifications": [ "Web", "Bot", "Discord" ],
+  "name": "DisCatSharp Web App Template",
+  "identity": "DisCatSharp.WebApp.Template",
+  "shortName": "DCSWebApp",
+
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+
+  "sourceName": "DisCatSharpWebHost",
+  "defaultName": "DisCatSharpWebHost",
+
+  "symbols": {
+    "IncludeBot": {
+      "type": "computed",
+      "value": "false"
+    }
+  }
+}
