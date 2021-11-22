@@ -7,6 +7,7 @@ $srcDir = (Join-Path -path $scriptDir src)
 $original = (Join-Path -path $srcDir "DisCatSharpTemplates.nuspec")
 $versioned = (Join-Path -path $srcDir "DisCatSharpTemplates-versioned.nuspec")
 
+git fetch -t
 $tag=(git describe --tags --abbrev=0)
 
 Write-Host "Using Git Tag: $tag ..."
