@@ -9,6 +9,8 @@ $versioned = (Join-Path -path $srcDir "DisCatSharpTemplates-versioned.nuspec")
 
 $tag=(git describe --tags --abbrev=0)
 
+Write-Host "Using Git Tag: $tag ..."
+
 # nuget.exe needs to be on the path or aliased
 function Reset-Templates{
     [cmdletbinding()]
