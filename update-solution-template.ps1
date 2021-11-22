@@ -22,7 +22,13 @@ foreach ($projectName in "DisCatSharpProjectBot", "DisCatSharpProjectWeb")
 	New-Item -Path $destinationDir -ItemType Directory
 	Copy-Item -Path $copyDir -Destination $solutionDir -Recurse -Force
 
-	Remove-Item -Recurse -Force "$destinationDir/.template.config"
-	Remove-Item -Recurse -Force "$destinationDir/bin"
-	Remove-Item -Recurse -Force "$destinationDir/obj"
+	for($folder in ".temlate.config", "bin", "obj")
+	{
+		$check = Join-Path $destinationDir $folder
+		if (Test-Path -LiteralPath $check)
+		{
+			Remove-Item -Recurse -Force "$check"
+					
+		}
+	}
 }
