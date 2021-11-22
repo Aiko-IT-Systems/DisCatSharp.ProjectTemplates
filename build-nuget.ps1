@@ -53,7 +53,7 @@ function ResetSpec(){
 }
 
 # we need to ensure our solution template is generated / updated prior to final package
-Start-Process powershell "$scriptDir\update-solution-template.ps1"
+Start-Process powershell "$scriptDir/update-solution-template.ps1"
 
 # start script
 Clean
