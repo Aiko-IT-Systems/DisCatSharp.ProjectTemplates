@@ -22,7 +22,7 @@ foreach ($projectName in "DisCatSharpProjectBot", "DisCatSharpProjectWeb")
 	New-Item -Path $destinationDir -ItemType Directory
 	Copy-Item -Path $copyDir -Destination $solutionDir -Recurse -Force
 
-	for($folder in ".temlate.config", "bin", "obj")
+	foreach($folder in ".temlate.config", "bin", "obj")
 	{
 		$check = Join-Path $destinationDir $folder
 		if (Test-Path -LiteralPath $check)
