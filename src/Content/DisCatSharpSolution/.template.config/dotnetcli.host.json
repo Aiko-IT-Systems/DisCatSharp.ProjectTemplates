@@ -17,11 +17,6 @@
       "shortName": "uac"
     },
 
-    "UseCommands": {
-      "longName": "use-commands",
-      "shortName": "ucomm"
-    },
-
     "UseCommon": {
       "longName": "use-common",
       "shortName": "uc"

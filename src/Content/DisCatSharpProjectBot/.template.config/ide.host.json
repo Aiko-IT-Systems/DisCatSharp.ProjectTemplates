@@ -25,18 +25,6 @@
     },
 
     {
-      "id": "UseCommands",
-      "name": {
-        "text": "Use Commands Next"
-      },
-      "description": {
-        "text": "Should the Commands Next Module be included?"
-      },
-      "isVisible": "true",
-      "defaultValue": "false"
-    },
-
-    {
       "id": "UseCommon",
       "name": {
         "text": "Use Common"

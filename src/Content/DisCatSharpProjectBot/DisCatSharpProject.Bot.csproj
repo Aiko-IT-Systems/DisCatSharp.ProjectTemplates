@@ -20,12 +20,6 @@
 	</ItemGroup>
 	
 	<!--#endif -->
-	<!--#if (UseCommands) -->
-	<ItemGroup>
-		<PackageReference Include="DisCatSharp.CommandsNext" Version="9.8.4" />
-	</ItemGroup>
-
-	<!--#endif -->
 	<!--#if (UseCommon) -->
 	<ItemGroup>
 		<PackageReference Include="DisCatSharp.Common" Version="9.8.4" />

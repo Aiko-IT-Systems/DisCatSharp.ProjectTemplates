@@ -31,13 +31,6 @@
       "description": "Does your bot use the DisCatSharp.ApplicationCommands module?"
     },
 
-    "UseCommands": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "false",
-      "description": "Does your bot use the DisCatSharp.Commands module?"
-    },
-
     "UseCommon": {
       "type": "parameter",
       "datatype": "bool",
