@@ -44,8 +44,12 @@ internal class DisCatSharpProjectBot : DiscordHostedService, IDisCatSharpProject
         RegisterCommands(commandsExtension);
 #endif
 
-#if (!UseTranslations)
-      this.Client.GetApplicationCommands().RegisterCommands<MyCommand>()
+#if (UseTranslations)        
+        /*this.Client.GetApplicationCommands().RegisterCommands<MyCommand>(translationSetup: translations =>
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "translations/my_simple_command.json");
+            translations.AddTranslation(path);
+        });*/
 #endif
         return Task.CompletedTask;
     }

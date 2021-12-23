@@ -29,7 +29,8 @@
         {
           "condition": "(!UseTranslations)",
           "exclude": [
-            "DisCatSharpProject.Bot/translations/*.json"
+            "DisCatSharpProject.Bot/translations/*.json",
+            "DisCatSharpProject.Bot/Commands/MyCommand.cs"
           ]
         }
       ]
