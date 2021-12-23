@@ -1,4 +1,6 @@
-﻿namespace DisCatSharpProject.Bot;
+﻿using DisCatSharpProject.Bot.Commands;
+
+namespace DisCatSharpProject.Bot;
 internal class DisCatSharpProjectBot : DiscordHostedService, IDisCatSharpProjectBot
 {
     public DisCatSharpProjectBot(IConfiguration config,
@@ -42,6 +44,9 @@ internal class DisCatSharpProjectBot : DiscordHostedService, IDisCatSharpProject
         RegisterCommands(commandsExtension);
 #endif
 
+#if (!UseTranslations)
+      this.Client.GetApplicationCommands().RegisterCommands<MyCommand>()
+#endif
         return Task.CompletedTask;
     }
 

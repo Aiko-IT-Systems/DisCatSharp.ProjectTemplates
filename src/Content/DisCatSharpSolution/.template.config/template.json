@@ -23,6 +23,19 @@
     "032123E7-E4E0-4B17-9564-ECA4B57F30B7"
   ],
 
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!UseTranslations)",
+          "exclude": [
+            "DisCatSharpProject.Bot/translations/*.json"
+          ]
+        }
+      ]
+    }
+  ],
+
   "symbols": {
     "DiscordToken": {
       "type": "parameter",
@@ -36,6 +49,13 @@
       "datatype": "bool",
       "defaultValue": "false",
       "description": "Does your bot use the DisCatSharp.ApplicationCommands module?"
+    },
+
+    "AddTranslations": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Requires ApplicationCommands. Adds Localization to your project"
     },
 
     "UseCommon": {
@@ -76,6 +96,11 @@
     "IncludeBot": {
       "type": "computed",
       "value": "true"
+    },
+
+    "UseTranslations": {
+      "type": "computed",
+      "value": "(UseApplicationCommands && AddTranslations)"
     }
   }
 }

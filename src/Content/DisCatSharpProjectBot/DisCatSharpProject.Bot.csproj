@@ -48,6 +48,11 @@
 	<ItemGroup>
 		<PackageReference Include="DisCatSharp.VoiceNext.Natives" Version="9.8.4" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Update="translations\my_simple_command.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
 	
 	<!--#endif -->
 </Project>

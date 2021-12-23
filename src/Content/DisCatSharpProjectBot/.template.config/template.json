@@ -31,6 +31,13 @@
       "description": "Does your bot use the DisCatSharp.ApplicationCommands module?"
     },
 
+    "AddTranslations": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Requires ApplicationCommands. Adds Localization to your project"    
+    },
+
     "UseCommon": {
       "type": "parameter",
       "datatype": "bool",
@@ -64,6 +71,11 @@
       "datatype": "bool",
       "defaultValue": "false",
       "description": "Does your bot use the DisCatSharp.VoiceNext.Natives module?"
+    },
+
+    "UseTranslations": {
+      "type": "computed",
+      "value": "(UseApplicationCommands && AddTranslations)"
     }
   }
 }
