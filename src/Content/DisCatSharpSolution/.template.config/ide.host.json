@@ -32,7 +32,7 @@
         "text": "Requires UseApplicationCommands as well. This adds localization to your project"
       },
       "isVisible": "true",
-      "defaultValue": "true"
+      "defaultValue": "false"
     },
     {
       "id": "UseCommon",

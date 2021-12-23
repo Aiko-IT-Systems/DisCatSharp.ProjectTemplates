@@ -16,20 +16,6 @@
   "sourceName": "DisCatSharpProject",
   "defaultName": "DisCatSharpProject",
 
-  "sources": [
-    {
-      "modifiers": [
-        {
-          "condition": "(!UseTranslations)",
-          "exclude": [
-            "DisCatSharpProject.Bot/translations/*.json",
-            "DisCatSharpProject.Bot/Commands/MyCommand.cs"
-          ]
-        }
-      ]
-    }
-  ],
-
   "symbols": {
     "DiscordToken": {
       "type": "parameter",
@@ -90,6 +76,20 @@
     "UseTranslations": {
       "type": "computed",
       "value": "(UseApplicationCommands && AddTranslations)"
-    }
+    },
+
+    "sources": [
+      {
+        "modifiers": [
+          {
+            "condition": "(!UseTranslations)",
+            "exclude": [
+              "**/translations/*.json",
+              "**/Commands/MyCommand.cs"
+            ]
+          }
+        ]
+      }
+    ]
   }
 }

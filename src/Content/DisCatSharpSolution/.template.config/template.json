@@ -23,20 +23,6 @@
     "032123E7-E4E0-4B17-9564-ECA4B57F30B7"
   ],
 
-  "sources": [
-    {
-      "modifiers": [
-        {
-          "condition": "(!UseTranslations)",
-          "exclude": [
-            "DisCatSharpProject.Bot/translations/*.json",
-            "DisCatSharpProject.Bot/Commands/MyCommand.cs"
-          ]
-        }
-      ]
-    }
-  ],
-
   "symbols": {
     "DiscordToken": {
       "type": "parameter",
@@ -103,5 +89,19 @@
       "type": "computed",
       "value": "(UseApplicationCommands && AddTranslations)"
     }
-  }
+  },
+
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!UseTranslations)",
+          "exclude": [
+            "**/translations/*.json",
+            "**/Commands/MyCommand.cs"
+          ]
+        }
+      ]
+    }
+  ]
 }
