@@ -24,7 +24,7 @@
       },
       {
         "name": "second",
-        "type": 1, // Type 1 for slash command
+        "type": 1,
         "name_translations": {
           "en-US": "second",
           "de": "zweite"
