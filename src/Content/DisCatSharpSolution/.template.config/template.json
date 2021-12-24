@@ -38,6 +38,13 @@
       "description": "Does your bot use the DisCatSharp.ApplicationCommands module?"
     },
 
+    "AddTranslations": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Requires ApplicationCommands. Adds Localization to your project"
+    },
+
     "UseCommon": {
       "type": "parameter",
       "datatype": "bool",
@@ -76,6 +83,25 @@
     "IncludeBot": {
       "type": "computed",
       "value": "true"
+    },
+
+    "UseTranslations": {
+      "type": "computed",
+      "value": "(UseApplicationCommands && AddTranslations)"
     }
-  }
+  },
+
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!UseTranslations)",
+          "exclude": [
+            "**/translations/*.json",
+            "**/Commands/MyCommand.cs"
+          ]
+        }
+      ]
+    }
+  ]
 }

@@ -1,0 +1,52 @@
+﻿[
+  {
+    "name": "my_command",
+    "name_translations": {
+      "en-US": "my_command",
+      "de": "mein_befehl"
+    },
+    "description_translations": {
+      "en-US": "This is decription of the command group.",
+      "de": "Das ist die Beschreibung der Befehl Gruppe."
+    },
+    "commands": [
+      {
+        "name": "first",
+        "type": 1,
+        "name_translations": {
+          "en-US": "first",
+          "de": "erste"
+        },
+        "description_translations": {
+          "en-US": "This is decription of the command.",
+          "de": "Das ist die Beschreibung des Befehls."
+        }
+      },
+      {
+        "name": "second",
+        "type": 1,
+        "name_translations": {
+          "en-US": "second",
+          "de": "zweite"
+        },
+        "description_translations": {
+          "en-US": "This is decription of the command.",
+          "de": "Das ist die Beschreibung des Befehls."
+        },
+        "options": [
+          {
+            "name": "value",
+            "name_translations": {
+              "en-US": "value",
+              "de": "wert"
+            },
+            "description_translations": {
+              "en-US": "Some string value.",
+              "de": "Ein string Wert."
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

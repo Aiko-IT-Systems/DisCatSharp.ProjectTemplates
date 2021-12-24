@@ -23,7 +23,17 @@
       "isVisible": "true",
       "defaultValue": "true"
     },
-
+    {
+      "id": "AddTranslations",
+      "name": {
+        "text": "Add Translations"
+      },
+      "description": {
+        "text": "Requires UseApplicationCommands as well. This adds localization to your project"
+      },
+      "isVisible": "true",
+      "defaultValue": "true"
+    },
     {
       "id": "UseCommon",
       "name": {

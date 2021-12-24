@@ -1,4 +1,6 @@
-﻿namespace DisCatSharpProject.Bot;
+﻿using DisCatSharpProject.Bot.Commands;
+
+namespace DisCatSharpProject.Bot;
 internal class DisCatSharpProjectBot : DiscordHostedService, IDisCatSharpProjectBot
 {
     public DisCatSharpProjectBot(IConfiguration config,
@@ -42,6 +44,13 @@ internal class DisCatSharpProjectBot : DiscordHostedService, IDisCatSharpProject
         RegisterCommands(commandsExtension);
 #endif
 
+#if (UseTranslations)        
+        /*this.Client.GetApplicationCommands().RegisterCommands<MyCommand>(translationSetup: translations =>
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "translations/my_simple_command.json");
+            translations.AddTranslation(path);
+        });*/
+#endif
         return Task.CompletedTask;
     }
 

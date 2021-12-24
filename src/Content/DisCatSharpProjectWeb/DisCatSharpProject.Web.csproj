@@ -16,8 +16,20 @@
 		<Copy
 			SourceFiles="@(MySourceFiles)"
 			DestinationFolder="$(OutDir)"/>
-	</Target>
+	</Target>			
 	<!--END CONFIGURATION COPY SECTION-->
+	
+	<!--#if (UseTranslations) -->
+	<ItemGroup>
+		<TranslationFiles Include="$(SolutionDir)*\translations\*.json"/>
+	</ItemGroup>
+
+	<Target Name="CopyTranslationFiles" AfterTargets="Build">
+		<Copy
+			SourceFiles="@(TranslationFiles)"
+			DestinationFolder="$(OutDir)\translations"/>
+	</Target>
+	<!--#endif-->
 	
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />

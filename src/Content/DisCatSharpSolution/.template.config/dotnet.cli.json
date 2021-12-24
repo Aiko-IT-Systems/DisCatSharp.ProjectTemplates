@@ -37,6 +37,10 @@
       "longName": "use-voice-natives",
       "shortName": "uvn"
 
+    },
+    "AddTranslations": {
+      "longName": "add-translations",
+      "shortName": "add-trans"
     }
   }
 }
