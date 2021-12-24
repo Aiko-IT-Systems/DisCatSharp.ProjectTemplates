@@ -12,7 +12,7 @@
     "commands": [
       {
         "name": "first",
-        "type": 1, // Type 1 for slash command
+        "type": 1,
         "name_translations": {
           "en-US": "first",
           "de": "erste"
