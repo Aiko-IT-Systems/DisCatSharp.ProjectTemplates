@@ -7,10 +7,8 @@ $srcDir = (Join-Path -path $scriptDir src)
 $original = (Join-Path -path $srcDir "DisCatSharpTemplates.nuspec")
 $versioned = (Join-Path -path $srcDir "DisCatSharpTemplates-versioned.nuspec")
 
-# Fetch tags
-git fetch -t
+$tag = Get-Content -Path (Join-Path -path $scriptDir "version.txt")
 
-$tag=(git describe --abbrev=0)
 Write-Host "Using Git Tag: $tag ..."
 
 # nuget.exe needs to be on the path or aliased
@@ -25,6 +23,7 @@ function Reset-Templates{
         &dotnet new --debug:reinit
     }
 }
+
 function Clean(){
     [cmdletbinding()]
     param(
