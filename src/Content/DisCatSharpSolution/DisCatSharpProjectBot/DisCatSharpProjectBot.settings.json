@@ -2,7 +2,7 @@
   "DisCatSharpProjectBot": {
     "Using": [
       //#if (UseInteractivity)
-      "DisCatSharp.Interactivitiy",
+      "DisCatSharp.Interactivity",
       //#endif
       //#if (UseLavalink)
       "DisCatSharp.Lavalink",

@@ -43,9 +43,9 @@ public static class DisCatSharpProjectBotServiceCollectionExtensions
 
         foreach (var type in results)
             if (guildId.HasValue)
-                commands.RegisterCommands(type, guildId);
+                commands.RegisterGuildCommands(type, guildId.Value);
             else
-                commands.RegisterCommands(type);
+                commands.RegisterGlobalCommands(type);
 
         return results.Select(x => x.Name).ToList();
     }

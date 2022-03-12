@@ -11,7 +11,6 @@ $versioned = (Join-Path -path $srcDir "DisCatSharpTemplates-versioned.nuspec")
 git fetch -t
 
 $tag=(git describe --abbrev=0)
-
 Write-Host "Using Git Tag: $tag ..."
 
 # nuget.exe needs to be on the path or aliased
@@ -39,6 +38,8 @@ function Clean(){
 }
 
 function SetupNuspec(){
+    Write-Host "Version in Nuspec: $tag"
+
     if (Test-Path -LiteralPath $versioned)
 	{
 		Write-Host "Removing Old $versioned..."
@@ -82,10 +83,13 @@ else{
 }
 
 # If the user wants to install the templates they must pass in a true value
-if($installTemplates){
-    $pathtonupkg = join-path $scriptDir "nupkg/DisCatSharp.ProjectTemplates.$tag.nupkg"
+if($installTemplates){    
+    $item = Get-ChildItem -Path "$scriptDir/nupkg" -File -Filter *.nupkg   
+
     # install nuget package using dotnet new --install
-    if(test-path $pathtonupkg){   
+    if($item){   
+        $name = $item.Name
+        $pathtonupkg = join-path $scriptDir "nupkg/$name"
         Reset-Templates
         'installing template with command "dotnet new --install {0}"' -f $pathtonupkg | write-host
         &dotnet new --install $pathtonupkg

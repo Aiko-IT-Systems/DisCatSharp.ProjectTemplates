@@ -21,7 +21,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discord Template Files", "Discord Template Files", "{D4CD91B8-51AC-419A-8423-0DBD61D01E77}"
 	ProjectSection(SolutionItems) = preProject
 		Content\DisCatSharpProjectBot\.template.config\dotnet.cli.json = Content\DisCatSharpProjectBot\.template.config\dotnet.cli.json
-		Content\DisCatSharpProjectBot\.template.config\dotnetcli.host.json = Content\DisCatSharpProjectBot\.template.config\dotnetcli.host.json
 		Content\DisCatSharpProjectBot\.template.config\ide.host.json = Content\DisCatSharpProjectBot\.template.config\ide.host.json
 		Content\DisCatSharpProjectBot\.template.config\template.json = Content\DisCatSharpProjectBot\.template.config\template.json
 	EndProjectSection
@@ -41,7 +40,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Template Files", "Solution Template Files", "{D6D3BBC8-0CC5-41BD-B75D-D8D7D7730D4D}"
 	ProjectSection(SolutionItems) = preProject
 		Content\DisCatSharpSolution\.template.config\dotnet.cli.json = Content\DisCatSharpSolution\.template.config\dotnet.cli.json
-		Content\DisCatSharpSolution\.template.config\dotnetcli.host.json = Content\DisCatSharpSolution\.template.config\dotnetcli.host.json
 		Content\DisCatSharpSolution\.template.config\ide.host.json = Content\DisCatSharpSolution\.template.config\ide.host.json
 		Content\DisCatSharpSolution\.template.config\template.json = Content\DisCatSharpSolution\.template.config\template.json
 	EndProjectSection
@@ -54,6 +52,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{29D79DF8-3154-4EFA-9E7D-802ADB86CF5C}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\nuget.yml = ..\.github\workflows\nuget.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{747F393E-2B41-45F5-BA2F-A0BE8F2E3278}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Global
