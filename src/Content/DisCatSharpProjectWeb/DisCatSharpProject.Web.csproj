@@ -9,30 +9,26 @@
 
 	<!--This automatically copies ALL json files within the solution into our output directory-->
 	<ItemGroup>
-		<MySourceFiles Include="$(SolutionDir)*\*.json"/>
+		<MySourceFiles Include="$(SolutionDir)*\*.json" />
 	</ItemGroup>
 
 	<Target Name="CopyConfigurationFiles" AfterTargets="Build">
-		<Copy
-			SourceFiles="@(MySourceFiles)"
-			DestinationFolder="$(OutDir)"/>
+		<Copy SourceFiles="@(MySourceFiles)" DestinationFolder="$(OutDir)" />
 	</Target>			
 	<!--END CONFIGURATION COPY SECTION-->
 	
 	<!--#if (UseTranslations) -->
 	<ItemGroup>
-		<TranslationFiles Include="$(SolutionDir)*\translations\*.json"/>
+		<TranslationFiles Include="$(SolutionDir)*\translations\*.json" />
 	</ItemGroup>
 
 	<Target Name="CopyTranslationFiles" AfterTargets="Build">
-		<Copy
-			SourceFiles="@(TranslationFiles)"
-			DestinationFolder="$(OutDir)\translations"/>
+		<Copy SourceFiles="@(TranslationFiles)" DestinationFolder="$(OutDir)\translations" />
 	</Target>
 	<!--#endif-->
 	
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
   </ItemGroup>
 
 	<!--#if (IncludeBot) -->

@@ -1,6 +1,7 @@
 ﻿[
   {
     "name": "my_command",
+    "description": "This is decription of the command group",
     "name_translations": {
       "en-US": "my_command",
       "de": "mein_befehl"
@@ -13,6 +14,7 @@
       {
         "name": "first",
         "type": 1, // Type 1 for slash command
+        "description": "This is decription of the command",
         "name_translations": {
           "en-US": "first",
           "de": "erste"
@@ -25,6 +27,7 @@
       {
         "name": "second",
         "type": 1, // Type 1 for slash command
+        "description": "This is decription of the command",
         "name_translations": {
           "en-US": "second",
           "de": "zweite"
@@ -36,6 +39,7 @@
         "options": [
           {
             "name": "value",
+            "description": "Some string value",
             "name_translations": {
               "en-US": "value",
               "de": "wert"
