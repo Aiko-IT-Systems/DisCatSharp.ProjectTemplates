@@ -11,7 +11,7 @@
 		<PackageReference Include="DisCatSharp.Configuration" Version="10.4.1" />
 		<PackageReference Include="DisCatSharp.Hosting" Version="10.4.1" />
 		<PackageReference Include="DisCatSharp.Hosting.DependencyInjection" Version="10.4.1" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
 	</ItemGroup>
 
 	<!--#if (UseApplicationCommands) -->
