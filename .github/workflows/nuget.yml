@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: nuget/setup-nuget@v1.2.0
+      - uses: nuget/setup-nuget@v1.3.0
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
           nuget-version: 'latest'
