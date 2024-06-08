@@ -13,7 +13,7 @@
     </packageTypes>
 	<projectUrl>https://github.com/Aiko-IT-Systems/DisCatSharp.ProjectTemplates</projectUrl>
 	<title>DisCatSharp Project Template Pack</title>
-	<iconUrl>https://raw.githubusercontent.com/Aiko-IT-Systems/DisCatSharp/main/DisCatSharp.Logos/logobig.png</iconUrl>
+	<iconUrl>https://raw.githubusercontent.com/Aiko-IT-Systems/DisCatSharp/main/DisCatSharp.Logos/logo-pride.png</iconUrl>
   </metadata>
   <files>
     <file src="Content\**\*.*" exclude="Content\**\bin\**\*.*;Content\**\obj\**\*.*" target="Content" />
