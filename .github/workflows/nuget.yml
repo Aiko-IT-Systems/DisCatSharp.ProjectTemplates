@@ -10,10 +10,17 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4.3.0
+        with:
+            dotnet-version: |
+                10.0.100-preview.1.25120.13
+                9.x
+                8.x
       - uses: nuget/setup-nuget@v2.0.1
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
           nuget-version: 'latest'
       - run: pwsh ./build-nuget.ps1
-      - run: nuget push -src "https://www.nuget.org/api/v2/package" nupkg/DisCatSharp.ProjectTemplates.*
+      - run: nuget push -src "https://api.nuget.org/v3/index.json" nupkg/DisCatSharp.ProjectTemplates.*
         shell: pwsh
