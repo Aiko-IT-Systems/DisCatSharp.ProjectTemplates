@@ -17,7 +17,7 @@ jobs:
                 10.0.100-preview.1.25120.13
                 9.x
                 8.x
-      - uses: nuget/setup-nuget@v2.0.2
+      - uses: nuget/setup-nuget@v3.0.0
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
           nuget-version: 'latest'
