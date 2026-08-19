@@ -1,0 +1,119 @@
+name: "Update DisCatSharp Version"
+
+on:
+    schedule:
+        # Runs every day at 06:00 UTC
+        - cron: "0 6 * * *"
+    workflow_dispatch:
+        inputs:
+            force_version:
+                description: "Force a specific version (leave empty to auto-detect)"
+                required: false
+                type: string
+
+permissions:
+    contents: write
+    actions: write
+
+concurrency:
+    group: update-version
+    cancel-in-progress: true
+
+env:
+    GH_TOKEN: ${{ github.token }}
+
+jobs:
+    check-and-update:
+        runs-on: ubuntu-latest
+        name: Check for new DisCatSharp release and update
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Read current version
+              id: current
+              run: |
+                  version=$(cat version.txt | tr -d '[:space:]')
+                  echo "version=${version}" >> "$GITHUB_OUTPUT"
+                  echo "Current version.txt: ${version}"
+
+            - name: Resolve target version
+              id: target
+              env:
+                  FORCE_VERSION: ${{ inputs.force_version }}
+              run: |
+                  if [ -n "$FORCE_VERSION" ]; then
+                    echo "version=${FORCE_VERSION}" >> "$GITHUB_OUTPUT"
+                    echo "Using forced version: ${FORCE_VERSION}"
+                    exit 0
+                  fi
+
+                  # Try nightly release first (tagged like 10.x.x-nightly-NNN)
+                  nightly=$(gh api "repos/Aiko-IT-Systems/DisCatSharp/releases" \
+                    --jq '[.[] | select(.tag_name | test("nightly"; "i"))] | first | .tag_name // empty' \
+                    2>/dev/null || true)
+
+                  # Fall back to latest stable release
+                  stable=$(gh api "repos/Aiko-IT-Systems/DisCatSharp/releases/latest" \
+                    --jq '.tag_name // empty' \
+                    2>/dev/null || true)
+
+                  # Strip leading "v" if present
+                  nightly="${nightly#v}"
+                  stable="${stable#v}"
+
+                  # Prefer nightly when available
+                  if [ -n "$nightly" ]; then
+                    echo "version=${nightly}" >> "$GITHUB_OUTPUT"
+                    echo "Resolved latest nightly: ${nightly}"
+                  elif [ -n "$stable" ]; then
+                    echo "version=${stable}" >> "$GITHUB_OUTPUT"
+                    echo "Resolved latest stable: ${stable}"
+                  else
+                    echo "::error::Could not resolve a DisCatSharp release version"
+                    exit 1
+                  fi
+
+            - name: Check if update is needed
+              id: diff
+              env:
+                  CURRENT: ${{ steps.current.outputs.version }}
+                  TARGET: ${{ steps.target.outputs.version }}
+              run: |
+                  if [ "$CURRENT" = "$TARGET" ]; then
+                    echo "up_to_date=true" >> "$GITHUB_OUTPUT"
+                    echo "Version is already up-to-date: ${CURRENT}"
+                  else
+                    echo "up_to_date=false" >> "$GITHUB_OUTPUT"
+                    echo "Update needed: ${CURRENT} → ${TARGET}"
+                  fi
+
+            - name: Update version.txt
+              if: steps.diff.outputs.up_to_date == 'false'
+              env:
+                  TARGET: ${{ steps.target.outputs.version }}
+              run: |
+                  echo "$TARGET" > version.txt
+                  echo "Written ${TARGET} to version.txt"
+
+            - name: Commit and push updated version
+              if: steps.diff.outputs.up_to_date == 'false'
+              env:
+                  TARGET: ${{ steps.target.outputs.version }}
+                  CURRENT: ${{ steps.current.outputs.version }}
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git add version.txt
+                  git commit -m "chore: bump DisCatSharp version ${CURRENT} → ${TARGET}"
+                  git push
+
+            - name: Trigger release workflow
+              if: steps.diff.outputs.up_to_date == 'false'
+              run: |
+                  gh workflow run release.yml --ref main
+                  echo "Triggered release.yml"
