@@ -1,26 +1,179 @@
-name: NuGet
+name: "Release DisCatSharp.ProjectTemplates"
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+    workflow_dispatch:
+    workflow_call:
+
+permissions:
+    contents: write
+    id-token: write
+    attestations: write
+    packages: write
+
+concurrency:
+    group: release
+    cancel-in-progress: false
+
+env:
+    DOTNET_NOLOGO: true
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+    DOTNET_CLI_TELEMETRY_OPTOUT: true
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: true
+    GH_TOKEN: ${{ github.token }}
 
 jobs:
-  build:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Setup .NET
-        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
-        with:
-            dotnet-version: |
-                11.x
-                10.x
-                9.x
-      - uses: nuget/setup-nuget@fd55a6f3b34392fa83fde1454582407d8c714123 # v4.0
-        with:
-          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-          nuget-version: 'latest'
-      - run: pwsh ./build-nuget.ps1
-      - run: nuget push -src "https://api.nuget.org/v3/index.json" nupkg/DisCatSharp.ProjectTemplates.*
-        shell: pwsh
+    release:
+        timeout-minutes: 30
+        runs-on: ubuntu-latest
+        name: Build, attest, and release
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  fetch-depth: 0
+
+            - name: Read version
+              id: version
+              run: |
+                  version=$(cat version.txt | tr -d '[:space:]')
+                  echo "version=${version}" >> "$GITHUB_OUTPUT"
+                  echo "tag=v${version}" >> "$GITHUB_OUTPUT"
+                  echo "title=DisCatSharp.ProjectTemplates v${version}" >> "$GITHUB_OUTPUT"
+
+            - name: Setup .NET
+              uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+              with:
+                  dotnet-version: |
+                      11.x
+                      10.x
+                      9.x
+
+            - name: Build NuGet package
+              shell: pwsh
+              run: pwsh ./build-nuget.ps1
+
+            - name: Collect artifacts
+              shell: pwsh
+              run: |
+                  New-Item -ItemType Directory -Force -Path ./release-artifacts | Out-Null
+                  Get-ChildItem -Path ./nupkg -Filter *.nupkg |
+                      Where-Object { $_.Name -notmatch '\.symbols\.' } |
+                      Copy-Item -Destination ./release-artifacts/
+                  Copy-Item -LiteralPath ./README.md -Destination ./release-artifacts/README.md
+
+            - name: Generate build provenance attestation
+              uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+              with:
+                  subject-path: "release-artifacts/*.nupkg"
+
+            - name: Verify build provenance
+              shell: bash
+              run: |
+                  retry() {
+                    for attempt in {1..6}; do
+                      "$@" && return 0
+                      if [ "$attempt" -lt 6 ]; then sleep 5; fi
+                    done
+                    return 1
+                  }
+                  for artifact in release-artifacts/*.nupkg; do
+                    retry gh attestation verify "$artifact" --repo "$GITHUB_REPOSITORY"
+                  done
+
+            - name: Create or update draft release
+              env:
+                  RELEASE_TAG: ${{ steps.version.outputs.tag }}
+                  RELEASE_TITLE: ${{ steps.version.outputs.title }}
+                  VERSION: ${{ steps.version.outputs.version }}
+              run: |
+                  is_prerelease=false
+                  if echo "$VERSION" | grep -qiE '(nightly|pre|alpha|beta|rc)'; then
+                    is_prerelease=true
+                  fi
+
+                  if gh release view "$RELEASE_TAG" &>/dev/null; then
+                    gh release upload "$RELEASE_TAG" release-artifacts/*.nupkg --clobber
+                  else
+                    args=(
+                      "$RELEASE_TAG"
+                      --draft
+                      --target "$GITHUB_SHA"
+                      --title "$RELEASE_TITLE"
+                      --generate-notes
+                    )
+                    if [ "$is_prerelease" = "true" ]; then
+                      args+=(--prerelease --latest=false)
+                    else
+                      args+=(--latest)
+                    fi
+                    gh release create "${args[@]}"
+                    gh release upload "$RELEASE_TAG" release-artifacts/*.nupkg --clobber
+                  fi
+
+            - name: NuGet login (OIDC → temp API key)
+              uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+              id: nuget_login
+              with:
+                  user: ${{ secrets.NUGET_USER }}
+
+            - name: Publish packages to NuGet (with retry)
+              shell: pwsh
+              env:
+                  NUGET_API_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
+              run: |
+                  Get-ChildItem -Path ./release-artifacts -Filter *.nupkg | ForEach-Object {
+                      for ($i = 1; $i -le 3; $i++) {
+                          dotnet nuget push $_.FullName `
+                              --source https://api.nuget.org/v3/index.json `
+                              --api-key $env:NUGET_API_KEY `
+                              --skip-duplicate
+                          if ($LASTEXITCODE -eq 0) { break }
+                          if ($i -lt 3) { Start-Sleep -Seconds 10 }
+                          else { exit $LASTEXITCODE }
+                      }
+                  }
+
+            - name: Publish to GitHub Packages
+              shell: pwsh
+              env:
+                  GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  Get-ChildItem -Path ./release-artifacts -Filter *.nupkg | ForEach-Object {
+                      dotnet nuget push $_.FullName `
+                          --source https://nuget.pkg.github.com/Aiko-IT-Systems/index.json `
+                          --api-key $env:GITHUB_PACKAGES_TOKEN `
+                          --skip-duplicate
+                      if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+                  }
+
+            - name: Publish immutable GitHub Release
+              env:
+                  RELEASE_TAG: ${{ steps.version.outputs.tag }}
+                  VERSION: ${{ steps.version.outputs.version }}
+              run: |
+                  is_prerelease=false
+                  if echo "$VERSION" | grep -qiE '(nightly|pre|alpha|beta|rc)'; then
+                    is_prerelease=true
+                  fi
+                  latest=true
+                  if [ "$is_prerelease" = "true" ]; then latest=false; fi
+                  gh release edit "$RELEASE_TAG" --draft=false --latest="$latest"
+
+            - name: Verify immutable release and attestations
+              env:
+                  RELEASE_TAG: ${{ steps.version.outputs.tag }}
+              run: |
+                  retry() {
+                    for attempt in {1..12}; do
+                      "$@" && return 0
+                      if [ "$attempt" -lt 12 ]; then sleep 5; fi
+                    done
+                    return 1
+                  }
+
+                  retry gh release verify "$RELEASE_TAG"
+
+                  for artifact in release-artifacts/*.nupkg; do
+                    retry gh attestation verify "$artifact" --repo "$GITHUB_REPOSITORY"
+                  done
