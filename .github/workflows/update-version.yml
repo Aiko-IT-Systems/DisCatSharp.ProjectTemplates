@@ -100,6 +100,18 @@ jobs:
                   echo "$TARGET" > version.txt
                   echo "Written ${TARGET} to version.txt"
 
+            - name: Update DisCatSharp package versions in csproj files
+              if: steps.diff.outputs.up_to_date == 'false'
+              env:
+                  TARGET: ${{ steps.target.outputs.version }}
+              run: |
+                  find src/Content -name '*.csproj' | while read -r csproj; do
+                    perl -i -pe \
+                      's|(Include="DisCatSharp(?!\.Analyzer)(?:\.[A-Za-z.]+)?" Version=")[^"]+(")|${1}'"${TARGET}"'${2}|g' \
+                      "$csproj"
+                    echo "Updated $csproj"
+                  done
+
             - name: Commit and push updated version
               if: steps.diff.outputs.up_to_date == 'false'
               env:
@@ -108,7 +120,7 @@ jobs:
               run: |
                   git config user.name "github-actions[bot]"
                   git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-                  git add version.txt
+                  git add version.txt src/Content
                   git commit -m "chore: bump DisCatSharp version ${CURRENT} → ${TARGET}"
                   git push
 
