@@ -105,9 +105,12 @@ jobs:
               env:
                   TARGET: ${{ steps.target.outputs.version }}
               run: |
+                  # Only update DisCatSharp.* packages whose current version matches the
+                  # main DisCatSharp release pattern (e.g. 10.x.x or 10.x.x-nightly-NNN).
+                  # This leaves DisCatSharp.Analyzer (version 1.x.x.x) untouched.
                   find src/Content -name '*.csproj' | while read -r csproj; do
                     perl -i -pe \
-                      's|(Include="DisCatSharp(?!\.Analyzer)(?:\.[A-Za-z.]+)?" Version=")[^"]+(")|${1}'"${TARGET}"'${2}|g' \
+                      's|(Include="DisCatSharp(?:\.[A-Za-z.]+)?" Version=")(\d{2,}\.[^"]+)(")|${1}'"${TARGET}"'${3}|g' \
                       "$csproj"
                     echo "Updated $csproj"
                   done
