@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DisCatSharpProjectBot/DisCatSharpProject.Bot.csproj" />
+  <Project Path="DisCatSharpProjectWeb/DisCatSharpProject.Web.csproj" />
+</Solution>

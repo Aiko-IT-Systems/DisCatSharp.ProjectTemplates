@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Badger",
-  "classifications": [ "Web", "Bot", "Discord" ],
+  "classifications": [ "Web", "ASP.NET Core", "Bot", "Discord" ],
   "name": "DisCatSharp Web App Template",
   "identity": "DisCatSharp.WebApp.Template",
   "shortName": "DCSWebApp",

@@ -1,0 +1,42 @@
+<Solution>
+  <Folder Name="/Files/">
+    <File Path="../.gitignore" />
+    <File Path="../README.md" />
+  </Folder>
+  <Folder Name="/Solution Template/">
+    <File Path="Content/DisCatSharpSolution/DisCatSharpProject.slnx" />
+  </Folder>
+  <Folder Name="/template files/">
+    <File Path="../build-nuget.ps1" />
+    <File Path="../clean.ps1" />
+    <File Path="../README.md" />
+    <File Path="../update-solution-template.ps1" />
+    <File Path="DisCatSharpTemplates.nuspec" />
+    <File Path="version.txt" />
+  </Folder>
+  <Folder Name="/template files/Discord Template Files/">
+    <File Path="Content/DisCatSharpProjectBot/.template.config/dotnet.cli.json" />
+    <File Path="Content/DisCatSharpProjectBot/.template.config/ide.host.json" />
+    <File Path="Content/DisCatSharpProjectBot/.template.config/template.json" />
+  </Folder>
+  <Folder Name="/template files/powershell/">
+    <File Path="../build-nuget.ps1" />
+    <File Path="../clean.ps1" />
+    <File Path="../reset-templates.ps1" />
+    <File Path="../update-solution-template.ps1" />
+  </Folder>
+  <Folder Name="/template files/Solution Template Files/">
+    <File Path="Content/DisCatSharpSolution/.template.config/dotnet.cli.json" />
+    <File Path="Content/DisCatSharpSolution/.template.config/ide.host.json" />
+    <File Path="Content/DisCatSharpSolution/.template.config/template.json" />
+  </Folder>
+  <Folder Name="/template files/Web Host Template files/">
+    <File Path="Content/DisCatSharpProjectWeb/.template.config/ide.host.json" />
+    <File Path="Content/DisCatSharpProjectWeb/.template.config/template.json" />
+  </Folder>
+  <Folder Name="/workflows/">
+    <File Path="../.github/workflows/nuget.yml" />
+  </Folder>
+  <Project Path="Content/DisCatSharpProjectBot/DisCatSharpProject.Bot.csproj" />
+  <Project Path="Content/DisCatSharpProjectWeb/DisCatSharpProject.Web.csproj" />
+</Solution>

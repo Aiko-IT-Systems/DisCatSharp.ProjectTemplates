@@ -31,6 +31,13 @@
       "description": "Does your bot use the DisCatSharp.ApplicationCommands module?"
     },
 
+    "UseCommandsNext": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Does your bot use the DisCatSharp.CommandsNext module?"
+    },
+
     "AddTranslations": {
       "type": "parameter",
       "datatype": "bool",
@@ -63,14 +70,14 @@
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
-      "description": "Does your bot use the DisCatSharp.VoiceNext module?"
+      "description": "Does your bot use the DisCatSharp.Voice module?"
     },
 
     "UseVoiceNatives": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
-      "description": "Does your bot use the DisCatSharp.VoiceNext.Natives module?"
+      "description": "Does your bot use the DisCatSharp.Voice.Natives module?"
     },
 
     "UseTranslations": {

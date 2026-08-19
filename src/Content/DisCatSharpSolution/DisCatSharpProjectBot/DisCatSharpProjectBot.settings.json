@@ -8,7 +8,7 @@
       "DisCatSharp.Lavalink",
       //#endif
       //#if (UseVoice)
-      "DisCatSharp.VoiceNext"
+      "DisCatSharp.Voice"
       //#endif
     ],
 

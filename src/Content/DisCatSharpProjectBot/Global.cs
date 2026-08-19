@@ -9,6 +9,7 @@ global using DisCatSharp.ApplicationCommands;
 global using DisCatSharp.ApplicationCommands.Attributes;
 global using DisCatSharp.ApplicationCommands.Context;
 global using DisCatSharp.Entities;
+global using DisCatSharp.Enums;
 global using DisCatSharp.Hosting;
 #endregion
 

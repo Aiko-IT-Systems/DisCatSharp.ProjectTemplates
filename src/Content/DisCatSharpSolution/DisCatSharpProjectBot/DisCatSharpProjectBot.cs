@@ -4,7 +4,7 @@ namespace DisCatSharpProject.Bot;
 internal class DisCatSharpProjectBot : DiscordHostedService, IDisCatSharpProjectBot
 {
     public DisCatSharpProjectBot(IConfiguration config,
-        ILogger<DisCatSharpProjectBot> logger,
+        ILogger<DiscordHostedService> logger,
         IServiceProvider provider, 
         IHostApplicationLifetime lifetime) : base(config, logger, provider, lifetime, "DisCatSharpProjectBot") {}
 

@@ -6,7 +6,7 @@ internal class ServerCommands : ApplicationCommandsModule
     {
         await context.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource,
             new DiscordInteractionResponseBuilder()
-                .AsEphemeral(true)
+            .AsEphemeral()
                 .WithContent("Retrieving ping, please wait"));
 
         await context.Channel.SendMessageAsync($"Pong: `{context.Client.Ping}");
@@ -17,7 +17,7 @@ internal class ServerCommands : ApplicationCommandsModule
     {
         await context.CreateResponseAsync(InteractionResponseType.DeferredChannelMessageWithSource);
 
-        var owner = context.Client.CurrentApplication.Owners.Count() > 1
+        var owner = context.Client.CurrentApplication.Members.Count() > 1
             ? context.Client.CurrentApplication.TeamName
             : context.Client.CurrentApplication.Team.Owner.Username;
 

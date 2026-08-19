@@ -21,3 +21,5 @@ To view the available parameters for the Bot Template, please use this command
 ```
 dotnet new DCSWebHostBot --help
 ```
+
+The solution template generates an `.slnx` solution file.

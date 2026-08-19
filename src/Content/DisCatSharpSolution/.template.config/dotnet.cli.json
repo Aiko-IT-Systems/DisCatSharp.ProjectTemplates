@@ -13,6 +13,11 @@
       "shortName": "uac"
     },
 
+    "UseCommandsNext": {
+      "longName": "use-commands-next",
+      "shortName": "ucn"
+    },
+
     "UseCommon": {
       "longName": "use-common",
       "shortName": "uc"

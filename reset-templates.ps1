@@ -5,7 +5,12 @@ function Reset-Templates{
     )
     process{
         'resetting dotnet new templates. folder: "{0}"' -f $templateEngineUserDir | Write-host
-        get-childitem -path $templateEngineUserDir -directory | Select-Object -ExpandProperty FullName | remove-item -recurse
+        if (Test-Path -LiteralPath $templateEngineUserDir)
+        {
+            Get-ChildItem -Path $templateEngineUserDir -Directory |
+                Select-Object -ExpandProperty FullName |
+                Remove-Item -Recurse -Force
+        }
         &dotnet new --debug:reinit
     }
 }

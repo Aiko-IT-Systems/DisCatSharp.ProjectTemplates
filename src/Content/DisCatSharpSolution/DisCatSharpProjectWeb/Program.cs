@@ -1,3 +1,5 @@
+using DisCatSharp.Hosting.AspNetCore;
+
 var builder = WebApplication
     .CreateBuilder(args);
 
@@ -39,6 +41,7 @@ builder.Configuration.AddDisCatSharpProjectBotConfiguration();
 
 builder.Services.AddOptions();
 builder.Services.AddLogging();
+builder.Services.AddDisCatSharpAspNetCore();
 
 /*
     Please use the DisCatSharpBot Project Template for adding however many
@@ -61,5 +64,6 @@ builder.Services.AddDisCatSharpProjectBotServices();
 
 // Still have the functionality of a website 
 var app = builder.Build();
+app.MapDisCatSharpIngress();
 app.MapGet("/", () => "Hello World!");
 app.Run();

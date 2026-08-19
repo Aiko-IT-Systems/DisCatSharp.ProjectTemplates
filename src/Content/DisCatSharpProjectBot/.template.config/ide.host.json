@@ -24,6 +24,17 @@
       "defaultValue": "true"
     },
     {
+      "id": "UseCommandsNext",
+      "name": {
+        "text": "Use CommandsNext"
+      },
+      "description": {
+        "text": "Should the CommandsNext module be included?"
+      },
+      "isVisible": true,
+      "defaultValue": "false"
+    },
+    {
       "id": "AddTranslations",
       "name": {
         "text": "Add Translations"

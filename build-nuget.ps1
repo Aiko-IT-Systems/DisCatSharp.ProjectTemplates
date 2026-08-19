@@ -7,11 +7,10 @@ $srcDir = (Join-Path -path $scriptDir src)
 $original = (Join-Path -path $srcDir "DisCatSharpTemplates.nuspec")
 $versioned = (Join-Path -path $srcDir "DisCatSharpTemplates-versioned.nuspec")
 
-$tag = Get-Content -Path (Join-Path -path $scriptDir "version.txt")
+$tag = (Get-Content -Path (Join-Path -path $scriptDir "version.txt") -Raw).Trim()
 
 Write-Host "Using Git Tag: $tag ..."
 
-# nuget.exe needs to be on the path or aliased
 function Reset-Templates{
     [cmdletbinding()]
     param(
@@ -19,7 +18,12 @@ function Reset-Templates{
     )
     process{
         'resetting dotnet new templates. folder: "{0}"' -f $templateEngineUserDir | Write-host
-        get-childitem -path $templateEngineUserDir -directory | Select-Object -ExpandProperty FullName | remove-item -recurse
+        if (Test-Path -LiteralPath $templateEngineUserDir)
+        {
+            Get-ChildItem -Path $templateEngineUserDir -Directory |
+                Select-Object -ExpandProperty FullName |
+                Remove-Item -Recurse -Force
+        }
         &dotnet new --debug:reinit
     }
 }
@@ -58,13 +62,13 @@ function ResetSpec(){
 }
 
 # we need to ensure our solution template is generated / updated prior to final package
-if($IsLinux)
+if ($IsLinux)
 {
-    Start-Process pwsh "$scriptDir/update-solution-template.ps1"
+    & pwsh (Join-Path $scriptDir "update-solution-template.ps1")
 }
 else
-{    
-    Start-Process powershell "$scriptDir/update-solution-template.ps1"
+{
+    & powershell (Join-Path $scriptDir "update-solution-template.ps1")
 }
 
 # start script
@@ -74,7 +78,7 @@ SetupNuspec
 # create nuget package
 $outputpath = Join-Path $scriptDir nupkg
 if(Test-Path $versioned){
-    ./nuget.exe pack $versioned -OutputDirectory $outputpath
+    dotnet nuget pack $versioned -OutputDirectory $outputpath
 }
 else{
     'ERROR: nuspec file not found at {0}' -f $versioned | Write-Error
