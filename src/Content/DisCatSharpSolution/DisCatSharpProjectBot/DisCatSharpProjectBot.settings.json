@@ -13,7 +13,24 @@
     ],
 
     "Discord": {
-      "Token": "DISCORD_TOKEN"
+      "Token": "DISCORD_TOKEN",
+      "Intents": "AllUnprivileged",
+
+      "Gateway": {
+        "AutoReconnect": true,
+        "ReconnectIndefinitely": false,
+        "LargeThreshold": 250
+      },
+
+      "Cache": {
+        "MessageCacheSize": 1024,
+        "AlwaysCacheMembers": false,
+        "AutoRefreshChannelCache": false
+      },
+
+      "Logging": {
+        "MinimumLogLevel": "Information"
+      }
     }
   }
 }
