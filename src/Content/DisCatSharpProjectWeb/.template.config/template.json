@@ -11,8 +11,8 @@
     "type": "project"
   },
 
-  "sourceName": "DisCatSharpWebHost",
-  "defaultName": "DisCatSharpWebHost",
+  "sourceName": "DisCatSharpProject",
+  "defaultName": "DisCatSharpProject",
 
   "symbols": {
     "IncludeBot": {

@@ -8,6 +8,7 @@ Template pack for building DisCatSharp-based .NET applications.
 | --- | --- | --- |
 | DisCatSharp Bot Template | `DCSBot` | A bot class library intended to be hosted by another app |
 | DisCatSharp Solution Template | `DCSSolution` | An ASP.NET Core host plus a bot project in one `.slnx` solution |
+| DisCatSharp Web App Template | `DCSWebApp` | An ASP.NET Core host |
 
 ## Install
 
@@ -29,16 +30,23 @@ Create the hosted solution:
 dotnet new DCSSolution -n MyBot --DiscordToken "DISCORD_TOKEN"
 ```
 
+Create the web app host:
+
+```powershell
+dotnet new DCSWebApp -n MyWebHost
+```
+
 To see the full parameter list for either template:
 
 ```powershell
 dotnet new DCSBot --help
 dotnet new DCSSolution --help
+dotnet new DCSWebApp --help
 ```
 
 ## Available options
 
-Both templates currently support these DisCatSharp module switches:
+The bot and solution templates support these DisCatSharp module switches:
 
 - `--UseApplicationCommands`
 - `--AddTranslations` (requires `--UseApplicationCommands`)
@@ -48,6 +56,8 @@ Both templates currently support these DisCatSharp module switches:
 - `--UseLavalink`
 - `--UseVoice`
 - `--UseVoiceNatives`
+
+The standalone `DCSWebApp` template is just the ASP.NET Core host shell, so it intentionally has no custom template options.
 
 ## Generated configuration
 
