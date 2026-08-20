@@ -2,7 +2,6 @@ name: "Release DisCatSharp.ProjectTemplates"
 
 on:
     workflow_dispatch:
-    workflow_call:
 
 permissions:
     contents: write
@@ -24,7 +23,7 @@ env:
 jobs:
     release:
         timeout-minutes: 30
-        runs-on: ubuntu-latest
+        runs-on: windows-latest
         name: Build, attest, and release
 
         steps:
@@ -35,11 +34,12 @@ jobs:
 
             - name: Read version
               id: version
+              shell: pwsh
               run: |
-                  version=$(cat version.txt | tr -d '[:space:]')
-                  echo "version=${version}" >> "$GITHUB_OUTPUT"
-                  echo "tag=v${version}" >> "$GITHUB_OUTPUT"
-                  echo "title=DisCatSharp.ProjectTemplates v${version}" >> "$GITHUB_OUTPUT"
+                  $version = (Get-Content -Path ./version.txt -Raw).Trim()
+                  "version=$version" >> $env:GITHUB_OUTPUT
+                  "tag=v$version" >> $env:GITHUB_OUTPUT
+                  "title=DisCatSharp.ProjectTemplates v$version" >> $env:GITHUB_OUTPUT
 
             - name: Setup .NET
               uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
@@ -82,16 +82,30 @@ jobs:
             - name: Verify build provenance
               env:
                   NUPKG: ${{ steps.artifacts.outputs.nupkg }}
-              shell: bash
+              shell: pwsh
               run: |
-                  retry() {
-                    for attempt in {1..6}; do
-                      "$@" && return 0
-                      if [ "$attempt" -lt 6 ]; then sleep 5; fi
-                    done
-                    return 1
+                  function Invoke-WithRetry {
+                      param(
+                          [scriptblock]$Action,
+                          [int]$MaxAttempts = 6,
+                          [int]$DelaySeconds = 5
+                      )
+
+                      for ($attempt = 1; $attempt -le $MaxAttempts; $attempt++) {
+                          & $Action
+                          if ($LASTEXITCODE -eq 0) {
+                              return
+                          }
+
+                          if ($attempt -lt $MaxAttempts) {
+                              Start-Sleep -Seconds $DelaySeconds
+                          }
+                      }
+
+                      exit $LASTEXITCODE
                   }
-                  retry gh attestation verify "$NUPKG" --repo "$GITHUB_REPOSITORY"
+
+                  Invoke-WithRetry { gh attestation verify $env:NUPKG --repo $env:GITHUB_REPOSITORY }
 
             - name: Create or update draft release
               env:
@@ -99,30 +113,36 @@ jobs:
                   RELEASE_TITLE: ${{ steps.version.outputs.title }}
                   VERSION: ${{ steps.version.outputs.version }}
                   NUPKG: ${{ steps.artifacts.outputs.nupkg }}
+              shell: pwsh
               run: |
-                  is_prerelease=false
-                  if echo "$VERSION" | grep -qiE '(nightly|pre|alpha|beta|rc)'; then
-                    is_prerelease=true
-                  fi
+                  $isPrerelease = $env:VERSION -match '(nightly|pre|alpha|beta|rc)'
 
-                  if gh release view "$RELEASE_TAG" &>/dev/null; then
-                    gh release upload "$RELEASE_TAG" "$NUPKG" --clobber
-                  else
-                    args=(
-                      "$RELEASE_TAG"
-                      --draft
-                      --target "$GITHUB_SHA"
-                      --title "$RELEASE_TITLE"
-                      --generate-notes
-                    )
-                    if [ "$is_prerelease" = "true" ]; then
-                      args+=(--prerelease --latest=false)
-                    else
-                      args+=(--latest)
-                    fi
-                    gh release create "${args[@]}"
-                    gh release upload "$RELEASE_TAG" "$NUPKG" --clobber
-                  fi
+                  gh release view $env:RELEASE_TAG *> $null
+                  if ($LASTEXITCODE -eq 0) {
+                      gh release upload $env:RELEASE_TAG $env:NUPKG --clobber
+                      if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+                      return
+                  }
+
+                  $arguments = @(
+                      $env:RELEASE_TAG,
+                      '--draft',
+                      '--target', $env:GITHUB_SHA,
+                      '--title', $env:RELEASE_TITLE,
+                      '--generate-notes'
+                  )
+
+                  if ($isPrerelease) {
+                      $arguments += @('--prerelease', '--latest=false')
+                  } else {
+                      $arguments += '--latest'
+                  }
+
+                  gh release create @arguments
+                  if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+                  gh release upload $env:RELEASE_TAG $env:NUPKG --clobber
+                  if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
             - name: NuGet login (OIDC → temp API key)
               uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
@@ -162,27 +182,39 @@ jobs:
               env:
                   RELEASE_TAG: ${{ steps.version.outputs.tag }}
                   VERSION: ${{ steps.version.outputs.version }}
+              shell: pwsh
               run: |
-                  is_prerelease=false
-                  if echo "$VERSION" | grep -qiE '(nightly|pre|alpha|beta|rc)'; then
-                    is_prerelease=true
-                  fi
-                  latest=true
-                  if [ "$is_prerelease" = "true" ]; then latest=false; fi
-                  gh release edit "$RELEASE_TAG" --draft=false --latest="$latest"
+                  $isPrerelease = $env:VERSION -match '(nightly|pre|alpha|beta|rc)'
+                  $latest = if ($isPrerelease) { 'false' } else { 'true' }
+                  gh release edit $env:RELEASE_TAG --draft=false --latest=$latest
+                  if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
             - name: Verify immutable release and attestations
               env:
                   RELEASE_TAG: ${{ steps.version.outputs.tag }}
                   NUPKG: ${{ steps.artifacts.outputs.nupkg }}
+              shell: pwsh
               run: |
-                  retry() {
-                    for attempt in {1..12}; do
-                      "$@" && return 0
-                      if [ "$attempt" -lt 12 ]; then sleep 5; fi
-                    done
-                    return 1
+                  function Invoke-WithRetry {
+                      param(
+                          [scriptblock]$Action,
+                          [int]$MaxAttempts = 12,
+                          [int]$DelaySeconds = 5
+                      )
+
+                      for ($attempt = 1; $attempt -le $MaxAttempts; $attempt++) {
+                          & $Action
+                          if ($LASTEXITCODE -eq 0) {
+                              return
+                          }
+
+                          if ($attempt -lt $MaxAttempts) {
+                              Start-Sleep -Seconds $DelaySeconds
+                          }
+                      }
+
+                      exit $LASTEXITCODE
                   }
 
-                  retry gh release verify "$RELEASE_TAG"
-                  retry gh attestation verify "$NUPKG" --repo "$GITHUB_REPOSITORY"
+                  Invoke-WithRetry { gh release verify $env:RELEASE_TAG }
+                  Invoke-WithRetry { gh attestation verify $env:NUPKG --repo $env:GITHUB_REPOSITORY }
