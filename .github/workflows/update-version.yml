@@ -10,6 +10,22 @@ on:
                 description: "Force a specific version (leave empty to auto-detect)"
                 required: false
                 type: string
+            wait_minutes:
+                description: "Wait time in minutes for the release workflow to run (default: 0)"
+                required: false
+                type: number
+                default: 0
+    workflow_call:
+        inputs:
+            force_version:
+                description: "Force a specific version (leave empty to auto-detect)"
+                required: false
+                type: string
+            wait_minutes:
+                description: "Wait time in minutes for the release workflow to run (default: 0)"
+                required: false
+                type: number
+                default: 0
 
 permissions:
     contents: write
@@ -26,21 +42,23 @@ jobs:
     check-and-update:
         runs-on: ubuntu-latest
         name: Check for new DisCatSharp release and update
-
         steps:
             - name: Checkout repository
               uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
               with:
                   fetch-depth: 0
                   token: ${{ secrets.GITHUB_TOKEN }}
-
             - name: Read current version
               id: current
               run: |
                   version=$(cat version.txt | tr -d '[:space:]')
                   echo "version=${version}" >> "$GITHUB_OUTPUT"
                   echo "Current version.txt: ${version}"
-
+            - name: Wait
+              if: ${{ inputs.wait_minutes > 0 }}
+              run: |
+                  echo "Waiting for ${inputs.wait_minutes} minutes before checking for new release..."
+                  sleep $((inputs.wait_minutes * 60))
             - name: Resolve target version
               id: target
               env:
@@ -77,7 +95,6 @@ jobs:
                     echo "::error::Could not resolve a DisCatSharp release version"
                     exit 1
                   fi
-
             - name: Check if update is needed
               id: diff
               env:
@@ -91,7 +108,6 @@ jobs:
                     echo "up_to_date=false" >> "$GITHUB_OUTPUT"
                     echo "Update needed: ${CURRENT} → ${TARGET}"
                   fi
-
             - name: Update version.txt
               if: steps.diff.outputs.up_to_date == 'false'
               env:
@@ -99,7 +115,6 @@ jobs:
               run: |
                   echo "$TARGET" > version.txt
                   echo "Written ${TARGET} to version.txt"
-
             - name: Update DisCatSharp package versions in csproj files
               if: steps.diff.outputs.up_to_date == 'false'
               env:
@@ -114,7 +129,6 @@ jobs:
                       "$csproj"
                     echo "Updated $csproj"
                   done
-
             - name: Commit and push updated version
               if: steps.diff.outputs.up_to_date == 'false'
               env:
@@ -126,7 +140,6 @@ jobs:
                   git add version.txt src/Content
                   git commit -m "chore: bump DisCatSharp version ${CURRENT} → ${TARGET}"
                   git push
-
             - name: Trigger release workflow
               if: steps.diff.outputs.up_to_date == 'false'
               run: |
