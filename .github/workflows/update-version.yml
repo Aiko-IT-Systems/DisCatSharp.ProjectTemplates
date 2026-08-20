@@ -43,6 +43,7 @@ env:
 
 jobs:
     check-and-update:
+        timeout-minutes: 30
         runs-on: ubuntu-latest
         name: Check for new DisCatSharp release and update
         steps:
