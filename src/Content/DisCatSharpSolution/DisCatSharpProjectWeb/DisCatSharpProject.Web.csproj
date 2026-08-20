@@ -34,7 +34,8 @@
 
 	<!--#if (IncludeBot) -->
 	<ItemGroup>
-</ItemGroup>
+		<ProjectReference Include="..\DisCatSharpProjectBot\DisCatSharpProject.Bot.csproj" />
+	</ItemGroup>
 
 	<!--#endif -->
 
