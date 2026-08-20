@@ -9,15 +9,16 @@
     <authors>aiko, Aiko-IT-Systems, DisCatSharp, AITSYS, Jon Braunsma Jr | Badger</authors>
     <license type="expression">Apache-2.0</license>
     <readme>README.md</readme>
+    <icon>logo-pride.png</icon>
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
 	<projectUrl>https://github.com/Aiko-IT-Systems/DisCatSharp.ProjectTemplates</projectUrl>
 	<title>DisCatSharp Project Template Pack</title>
-	<iconUrl>https://raw.githubusercontent.com/Aiko-IT-Systems/DisCatSharp/main/DisCatSharp.Logos/logo-pride.png</iconUrl>
   </metadata>
   <files>
     <file src="..\README.md" target="" />
+    <file src="..\logo-pride.png" target="" />
     <file src="Content\**\*.*" exclude="Content\**\bin\**\*.*;Content\**\obj\**\*.*" target="Content" />
   </files>  
 </package>

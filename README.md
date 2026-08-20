@@ -1,25 +1,67 @@
 # DisCatSharp.ProjectTemplates
-These project templates serve as a starting point for creating your Discord bot(s) in C#! 
 
-## Web Host Bot (Class Library)
-Allows you, the developer, to pick and choose which modules you'd like to include from [DisCatSharp](https://github.com/Aiko-IT-Systems/DisCatSharp) then sets up
-the project for you.
+Template pack for building DisCatSharp-based .NET applications.
 
-This is a class library, meant to be added as a project reference for hosted projects. Add your Bot's namespace in the web host project, this will
-allow you to use the extension methods provided in `ServiceCollectionExtensions` to add both the configuration file and bot.
+## Included templates
 
-## Web Host
-Contains the skeleton of your typical web project.
+| Template | Short name | What it creates |
+| --- | --- | --- |
+| DisCatSharp Bot Template | `DCSBot` | A bot class library intended to be hosted by another app |
+| DisCatSharp Solution Template | `DCSSolution` | An ASP.NET Core host plus a bot project in one `.slnx` solution |
 
-Converting Microsoft's Web Project template to have DCS as well is a low-priority WIP. For those waiting for this, or need it, please open an issue for it. If enough community interest is there we can allocate more resources towards getting it completed.
+## Install
 
-# **Important** 
-Rider currently **DOES NOT** support parameters in custom projects. So unfortunately, anyone who wants to use these templates with Rider
-will need to utilize the command line...
-
-To view the available parameters for the Bot Template, please use this command
-```
-dotnet new DCSWebHostBot --help
+```powershell
+dotnet new install DisCatSharp.ProjectTemplates
 ```
 
-The solution template generates an `.slnx` solution file.
+## Usage
+
+Create the bot class library:
+
+```powershell
+dotnet new DCSBot -n MyBot --DiscordToken "DISCORD_TOKEN"
+```
+
+Create the hosted solution:
+
+```powershell
+dotnet new DCSSolution -n MyBot --DiscordToken "DISCORD_TOKEN"
+```
+
+To see the full parameter list for either template:
+
+```powershell
+dotnet new DCSBot --help
+dotnet new DCSSolution --help
+```
+
+## Available options
+
+Both templates currently support these DisCatSharp module switches:
+
+- `--UseApplicationCommands`
+- `--AddTranslations` (requires `--UseApplicationCommands`)
+- `--UseCommandsNext`
+- `--UseCommon`
+- `--UseInteractivity`
+- `--UseLavalink`
+- `--UseVoice`
+- `--UseVoiceNatives`
+
+## Generated configuration
+
+The bot settings file uses the current nested `DiscordConfiguration` model. The generated `DisCatSharpProjectBot.settings.json` includes:
+
+- `Token`
+- `Intents`
+- `Gateway`
+- `Cache`
+- `Logging`
+
+This matches the modern DisCatSharp configuration structure and keeps gateway/cache/logging settings clearly separated.
+
+## Notes
+
+- The solution template generates an `.slnx` solution file.
+- Rider still has limited support for custom template parameters, so command-line usage is the safest path when you need template options.
