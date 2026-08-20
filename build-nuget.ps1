@@ -78,7 +78,7 @@ SetupNuspec
 # create nuget package
 $outputpath = Join-Path $scriptDir nupkg
 if(Test-Path $versioned){
-    dotnet nuget pack $versioned -OutputDirectory $outputpath
+    nuget pack $versioned -OutputDirectory $outputpath
 }
 else{
     'ERROR: nuspec file not found at {0}' -f $versioned | Write-Error

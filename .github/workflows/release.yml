@@ -49,18 +49,30 @@ jobs:
                       10.x
                       9.x
 
+            - name: Setup NuGet CLI
+              uses: nuget/setup-nuget@fd55a6f3b34392fa83fde1454582407d8c714123 # v4.0
+              with:
+                  nuget-version: latest
+
             - name: Build NuGet package
               shell: pwsh
               run: pwsh ./build-nuget.ps1
 
             - name: Collect artifacts
+              id: artifacts
               shell: pwsh
               run: |
                   New-Item -ItemType Directory -Force -Path ./release-artifacts | Out-Null
-                  Get-ChildItem -Path ./nupkg -Filter *.nupkg |
-                      Where-Object { $_.Name -notmatch '\.symbols\.' } |
-                      Copy-Item -Destination ./release-artifacts/
-                  Copy-Item -LiteralPath ./README.md -Destination ./release-artifacts/README.md
+                  $packages = Get-ChildItem -Path ./nupkg -Filter *.nupkg |
+                      Where-Object { $_.Name -notmatch '\.symbols\.' }
+                  if ($packages.Count -eq 0) {
+                      Write-Error "No .nupkg files found in ./nupkg — build may have failed."
+                      exit 1
+                  }
+                  $packages | Copy-Item -Destination ./release-artifacts/
+                  $nupkg = (Get-ChildItem ./release-artifacts -Filter *.nupkg | Select-Object -First 1).FullName
+                  Write-Host "Package: $nupkg"
+                  "nupkg=$nupkg" >> $env:GITHUB_OUTPUT
 
             - name: Generate build provenance attestation
               uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
@@ -68,6 +80,8 @@ jobs:
                   subject-path: "release-artifacts/*.nupkg"
 
             - name: Verify build provenance
+              env:
+                  NUPKG: ${{ steps.artifacts.outputs.nupkg }}
               shell: bash
               run: |
                   retry() {
@@ -77,15 +91,14 @@ jobs:
                     done
                     return 1
                   }
-                  for artifact in release-artifacts/*.nupkg; do
-                    retry gh attestation verify "$artifact" --repo "$GITHUB_REPOSITORY"
-                  done
+                  retry gh attestation verify "$NUPKG" --repo "$GITHUB_REPOSITORY"
 
             - name: Create or update draft release
               env:
                   RELEASE_TAG: ${{ steps.version.outputs.tag }}
                   RELEASE_TITLE: ${{ steps.version.outputs.title }}
                   VERSION: ${{ steps.version.outputs.version }}
+                  NUPKG: ${{ steps.artifacts.outputs.nupkg }}
               run: |
                   is_prerelease=false
                   if echo "$VERSION" | grep -qiE '(nightly|pre|alpha|beta|rc)'; then
@@ -93,7 +106,7 @@ jobs:
                   fi
 
                   if gh release view "$RELEASE_TAG" &>/dev/null; then
-                    gh release upload "$RELEASE_TAG" release-artifacts/*.nupkg --clobber
+                    gh release upload "$RELEASE_TAG" "$NUPKG" --clobber
                   else
                     args=(
                       "$RELEASE_TAG"
@@ -108,7 +121,7 @@ jobs:
                       args+=(--latest)
                     fi
                     gh release create "${args[@]}"
-                    gh release upload "$RELEASE_TAG" release-artifacts/*.nupkg --clobber
+                    gh release upload "$RELEASE_TAG" "$NUPKG" --clobber
                   fi
 
             - name: NuGet login (OIDC → temp API key)
@@ -121,31 +134,29 @@ jobs:
               shell: pwsh
               env:
                   NUGET_API_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
+                  NUPKG: ${{ steps.artifacts.outputs.nupkg }}
               run: |
-                  Get-ChildItem -Path ./release-artifacts -Filter *.nupkg | ForEach-Object {
-                      for ($i = 1; $i -le 3; $i++) {
-                          dotnet nuget push $_.FullName `
-                              --source https://api.nuget.org/v3/index.json `
-                              --api-key $env:NUGET_API_KEY `
-                              --skip-duplicate
-                          if ($LASTEXITCODE -eq 0) { break }
-                          if ($i -lt 3) { Start-Sleep -Seconds 10 }
-                          else { exit $LASTEXITCODE }
-                      }
+                  for ($i = 1; $i -le 3; $i++) {
+                      dotnet nuget push $env:NUPKG `
+                          --source https://api.nuget.org/v3/index.json `
+                          --api-key $env:NUGET_API_KEY `
+                          --skip-duplicate
+                      if ($LASTEXITCODE -eq 0) { break }
+                      if ($i -lt 3) { Start-Sleep -Seconds 10 }
+                      else { exit $LASTEXITCODE }
                   }
 
             - name: Publish to GitHub Packages
               shell: pwsh
               env:
                   GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NUPKG: ${{ steps.artifacts.outputs.nupkg }}
               run: |
-                  Get-ChildItem -Path ./release-artifacts -Filter *.nupkg | ForEach-Object {
-                      dotnet nuget push $_.FullName `
-                          --source https://nuget.pkg.github.com/Aiko-IT-Systems/index.json `
-                          --api-key $env:GITHUB_PACKAGES_TOKEN `
-                          --skip-duplicate
-                      if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-                  }
+                  dotnet nuget push $env:NUPKG `
+                      --source https://nuget.pkg.github.com/Aiko-IT-Systems/index.json `
+                      --api-key $env:GITHUB_PACKAGES_TOKEN `
+                      --skip-duplicate
+                  if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
             - name: Publish immutable GitHub Release
               env:
@@ -163,6 +174,7 @@ jobs:
             - name: Verify immutable release and attestations
               env:
                   RELEASE_TAG: ${{ steps.version.outputs.tag }}
+                  NUPKG: ${{ steps.artifacts.outputs.nupkg }}
               run: |
                   retry() {
                     for attempt in {1..12}; do
@@ -173,7 +185,4 @@ jobs:
                   }
 
                   retry gh release verify "$RELEASE_TAG"
-
-                  for artifact in release-artifacts/*.nupkg; do
-                    retry gh attestation verify "$artifact" --repo "$GITHUB_REPOSITORY"
-                  done
+                  retry gh attestation verify "$NUPKG" --repo "$GITHUB_REPOSITORY"
