@@ -30,6 +30,9 @@ on:
 permissions:
     contents: write
     actions: write
+    id-token: write
+    attestations: write
+    packages: write
 
 concurrency:
     group: update-version
