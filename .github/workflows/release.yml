@@ -24,7 +24,7 @@ env:
 jobs:
     release:
         timeout-minutes: 30
-        runs-on: windows-latest
+        runs-on: ubuntu-latest
         name: Build, attest, and release
 
         steps:
@@ -49,6 +49,12 @@ jobs:
                       11.x
                       10.x
                       9.x
+
+            - name: Install Mono
+              shell: bash
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y mono-complete
 
             - name: Setup NuGet CLI
               uses: nuget/setup-nuget@fd55a6f3b34392fa83fde1454582407d8c714123 # v4.0
