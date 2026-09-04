@@ -60,9 +60,11 @@ jobs:
                   echo "Current version.txt: ${version}"
             - name: Wait
               if: ${{ inputs.wait_minutes > 0 }}
+              env:
+                  WAIT_MINUTES: ${{ inputs.wait_minutes }}
               run: |
-                  echo "Waiting for ${inputs.wait_minutes} minutes before checking for new release..."
-                  sleep $((inputs.wait_minutes * 60))
+                  echo "Waiting for ${WAIT_MINUTES} minutes before checking for new release..."
+                  sleep "$((WAIT_MINUTES * 60))"
             - name: Resolve target version
               id: target
               env:
