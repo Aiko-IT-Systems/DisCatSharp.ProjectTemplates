@@ -39,7 +39,7 @@ concurrency:
     cancel-in-progress: true
 
 env:
-    GH_TOKEN: ${{ github.token }}
+    GH_TOKEN: ${{ secrets.NYUW_TOKEN_GH }}
 
 jobs:
     check-and-update:
@@ -51,7 +51,7 @@ jobs:
               uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
               with:
                   fetch-depth: 1
-                  token: ${{ secrets.GITHUB_TOKEN }}
+                  token: ${{ secrets.NYUW_TOKEN_GH }}
             - name: Read current version
               id: current
               run: |
@@ -141,8 +141,8 @@ jobs:
                   TARGET: ${{ steps.target.outputs.version }}
                   CURRENT: ${{ steps.current.outputs.version }}
               run: |
-                  git config user.name "github-actions[bot]"
-                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git config user.name "NyuwBot"
+                  git config user.email "nyuw@aitsys.dev"
                   git add version.txt src/Content
                   git commit -m "chore: bump DisCatSharp version ${CURRENT} → ${TARGET}"
                   git push
