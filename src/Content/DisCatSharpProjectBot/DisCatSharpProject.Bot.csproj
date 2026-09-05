@@ -7,52 +7,52 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp" Version="10.7.1-nightly-027" />
-		<PackageReference Include="DisCatSharp.Configuration" Version="10.7.1-nightly-027" />
-		<PackageReference Include="DisCatSharp.Hosting" Version="10.7.1-nightly-027" />
-		<PackageReference Include="DisCatSharp.Hosting.DependencyInjection" Version="10.7.1-nightly-027" />
+		<PackageReference Include="DisCatSharp" Version="10.7.1-nightly-028" />
+		<PackageReference Include="DisCatSharp.Configuration" Version="10.7.1-nightly-028" />
+		<PackageReference Include="DisCatSharp.Hosting" Version="10.7.1-nightly-028" />
+		<PackageReference Include="DisCatSharp.Hosting.DependencyInjection" Version="10.7.1-nightly-028" />
 		<PackageReference Include="DisCatSharp.Analyzer" Version="1.0.6.1" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.11" />
 	</ItemGroup>
 
 	<!--#if (UseApplicationCommands) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.ApplicationCommands" Version="10.7.1-nightly-027" />
+		<PackageReference Include="DisCatSharp.ApplicationCommands" Version="10.7.1-nightly-028" />
 	</ItemGroup>
 	
 	<!--#endif -->
 	<!--#if (UseCommandsNext) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.CommandsNext" Version="10.7.1-nightly-027" />
+		<PackageReference Include="DisCatSharp.CommandsNext" Version="10.7.1-nightly-028" />
 	</ItemGroup>
 	<!--#endif -->
 	<!--#if (UseCommon) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.Common" Version="10.7.1-nightly-027" />
+		<PackageReference Include="DisCatSharp.Common" Version="10.7.1-nightly-028" />
 	</ItemGroup>
 
 	<!--#endif -->
 	<!--#if (UseInteractivity) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.Interactivity" Version="10.7.1-nightly-027" />
+		<PackageReference Include="DisCatSharp.Interactivity" Version="10.7.1-nightly-028" />
 	</ItemGroup>
 	
 	<!--#endif -->
 	<!--#if (UseLavalink) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.Lavalink" Version="10.7.1-nightly-027" />
+		<PackageReference Include="DisCatSharp.Lavalink" Version="10.7.1-nightly-028" />
 	</ItemGroup>
 	
 	<!--#endif -->
 	<!--#if (UseVoice) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.Voice" Version="10.7.1-nightly-027" />
+		<PackageReference Include="DisCatSharp.Voice" Version="10.7.1-nightly-028" />
 	</ItemGroup>
 	
 	<!--#endif -->
 	<!--#if (UseVoiceNatives) -->
 	<ItemGroup>
-		<PackageReference Include="DisCatSharp.Voice.Natives" Version="10.7.1-nightly-027" />
+		<PackageReference Include="DisCatSharp.Voice.Natives" Version="10.7.1-nightly-028" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Update="translations\my_simple_command.json">
