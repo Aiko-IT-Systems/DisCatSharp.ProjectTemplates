@@ -146,7 +146,7 @@ jobs:
                   git config user.email "nyuw@aitsys.dev"
                   git add version.txt src/Content
                   git commit -m "chore: bump DisCatSharp version ${CURRENT} → ${TARGET}"
-                  git push
+                  git push -f
             - name: Trigger release workflow
               if: steps.diff.outputs.up_to_date == 'false'
               run: |
