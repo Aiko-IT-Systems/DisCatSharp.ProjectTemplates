@@ -66,6 +66,7 @@ jobs:
               id: target
               env:
                   FORCE_VERSION: ${{ inputs.force_version }}
+                  GH_TOKEN: ${{ secrets.NYUW_TOKEN_GH }}
               run: |
                   if [ -n "$FORCE_VERSION" ]; then
                     echo "version=${FORCE_VERSION}" >> "$GITHUB_OUTPUT"
