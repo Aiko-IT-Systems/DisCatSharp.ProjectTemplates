@@ -143,7 +143,7 @@ jobs:
                   committer_name: NyuwBot
                   committer_email: nyuw@aitsys.dev
                   commit: --signoff
-                  message: "chore: bump DisCatSharp version ${{ steps.target.outputs.version }} → ${{ steps.current.outputs.version }}"
+                  message: "chore: bump DisCatSharp version ${{ steps.current.outputs.version }} → ${{ steps.target.outputs.version }}"
             - name: Trigger release workflow
               if: steps.diff.outputs.up_to_date == 'false'
               env:
