@@ -140,6 +140,7 @@ jobs:
               env:
                   TARGET: ${{ steps.target.outputs.version }}
                   CURRENT: ${{ steps.current.outputs.version }}
+                  GH_TOKEN: ${{ secrets.NYUW_TOKEN_GH }}
               run: |
                   git config user.name "NyuwBot"
                   git config user.email "nyuw@aitsys.dev"
