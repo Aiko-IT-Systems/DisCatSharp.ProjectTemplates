@@ -149,6 +149,8 @@ jobs:
                   message: "chore: bump DisCatSharp version ${CURRENT} → ${TARGET}"
             - name: Trigger release workflow
               if: steps.diff.outputs.up_to_date == 'false'
+              env:
+                  GH_TOKEN: ${{ secrets.NYUW_TOKEN_GH }}
               run: |
                   gh workflow run release.yml --ref main
                   echo "Triggered release.yml"
