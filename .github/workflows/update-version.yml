@@ -38,9 +38,6 @@ concurrency:
     group: update-version
     cancel-in-progress: true
 
-env:
-    GH_TOKEN: ${{ secrets.NYUW_TOKEN_GH }}
-
 jobs:
     check-and-update:
         timeout-minutes: 30
@@ -51,7 +48,7 @@ jobs:
               uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
               with:
                   fetch-depth: 1
-#                  token: ${{ secrets.NYUW_TOKEN_GH }}
+                  token: ${{ secrets.NYUW_TOKEN_GH }}
             - name: Read current version
               id: current
               run: |
@@ -135,18 +132,20 @@ jobs:
                       "$csproj"
                     echo "Updated $csproj"
                   done
-            - name: Commit and push updated version
+            - name: Commit and push changes
+              uses: EndBug/add-and-commit@v11
               if: steps.diff.outputs.up_to_date == 'false'
               env:
                   TARGET: ${{ steps.target.outputs.version }}
                   CURRENT: ${{ steps.current.outputs.version }}
-                  GH_TOKEN: ${{ secrets.NYUW_TOKEN_GH }}
-              run: |
-                  git config user.name "NyuwBot"
-                  git config user.email "nyuw@aitsys.dev"
-                  git add version.txt src/Content
-                  git commit -m "chore: bump DisCatSharp version ${CURRENT} → ${TARGET}"
-                  git push -f
+              with:
+                  default_author: user_info
+                  author_name: NyuwBot
+                  author_email: nyuw@aitsys.dev
+                  committer_name: NyuwBot
+                  committer_email: nyuw@aitsys.dev
+                  commit: --signoff
+                  message: "chore: bump DisCatSharp version ${CURRENT} → ${TARGET}"
             - name: Trigger release workflow
               if: steps.diff.outputs.up_to_date == 'false'
               run: |
